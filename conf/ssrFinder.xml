@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="ssrFinder">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|ssrFinder|bin</entry>
+			<entry>PATHS|soft|Primer3|bin</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<entry key="exclusionZoneSize" description="Number of base on each side of the sequence where SSR area (ie. SSR + flanking regions) can't start or finish">
+				<entry key="defaultValue">20</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">20</entry>
+			</entry>
+
+			<entry key="ssrFlankingRegionSize" description="Number of base required around (ie. on each side of) the SSR to launch a primer search"> <!-- The length of the Primer3 target region is equal to the size of the detected SSR + 2x(size of the flanking region) -->
+				<entry key="defaultValue">30</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">30</entry>
+			</entry>
+
+			<entry key="minPrimerProductSize" description="Minimum primer product size"> <!-- Must be lower than maxValue !! -->
+				<entry key="defaultValue">80</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">50</entry>
+			</entry>
+
+			<entry key="maxPrimerProductSize" description="Maximum primer product size">
+				<entry key="defaultValue">300</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">100</entry>
+				<entry key="maxValue">3000</entry>
+			</entry>
+
+			<entry key="numberOfPrediction" description="Number of Primer pair (forward/reverse) that Primer3 must predict">
+				<entry key="defaultValue">1</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">1</entry>
+			</entry>
+
+			<entry key="useLowercase" description="Consider anterior lowercase masking of sequences">
+				<entry key="defaultValue">no</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+
+			<entry key="outFile" description="Name of the ssrFinder main output file">
+				<entry key="defaultValue">ssrFinder_result_file.gff</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+
+			<entry key="configFile" description="Name of the ssrFinder custom configuration file">
+				<entry key="defaultValue">Custom_config_file.xml</entry>
+				<entry key="type">string</entry>
+			</entry>
+
+			<entry key="executionDirectory" description="Name of ssrFinder execution directory">
+				<entry key="defaultValue">ssrFinder_execution_folder</entry>
+				<entry key="type">string</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<!-- Custom feature source -->
+			<entry key="sourceTag" description="Source Tag to use during features creation">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">SSRFINDER</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_SSRFINDER.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_SSRFINDER.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|marker</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">keepAllFeatures</entry>
+			</entry>
+
+			<entry key="EMBLRename.SSR">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+			<entry key="EMBLRename.Amplicon">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="reconstructionParameters">
+			<entry key="activateReconstruction" description="Activate or desactivate the global result files reconstruction for splitted sequences">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+		</entry>
+
+	</section>
+</triannotConf>

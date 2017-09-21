@@ -1,0 +1,509 @@
+#!/usr/bin/env perl
+
+package TriAnnot::Tools::EMBL_writer;
+
+##################################################
+## Documentation POD
+##################################################
+
+## Perl modules
+use strict;
+use warnings;
+use diagnostics;
+
+## CPAN modules
+use File::Basename;
+use Data::Dumper;
+
+## BioPerl modules
+use Bio::SeqIO;
+use Bio::SeqFeature::Generic;
+
+## TriAnnot modules
+use TriAnnot::Config::ConfigFileLoader;
+use TriAnnot::Tools::Logger;
+
+##################################################
+## Methods
+##################################################
+=head1 TriAnnot::Tools::EMBL_writer - Methods
+=cut
+
+################
+# Constructor
+################
+
+sub new {
+
+	# Recovers parameters
+	my ($class, %Attributes) = @_;
+
+	# Set object attributes
+	my $self = {
+		emblFormatName           => $Attributes{'Parser_object'}->{'EMBLFormat'},
+		emblFormatDescription    => $Attributes{'emblFormatDescription'},
+		all_features_ref         => $Attributes{'All_features_ref'}, # Reference to an array of Bio::SeqFeature::Generic features
+		parserObject             => $Attributes{'Parser_object'},
+		sequenceName             => $Attributes{'Parser_object'}->{'sequenceName'},
+		fullSequencePath         => Cwd::realpath($Attributes{'sequence'}),
+		directory                => $Attributes{'Parser_object'}->{'directory'},
+		emblFile                 => defined($Attributes{'Parser_object'}->{'emblFile'}) ? $Attributes{'Parser_object'}->{'emblFile'} : 'New_' . time() . '.embl',
+		listOfEMBLFeatures       => [],
+		_ignoredFeaturesCounters => {},
+		_featureCounter          => 0,
+		_currentFeatureToTreat   => undef,
+		_currentEMBLFeature      => undef
+	};
+
+	bless $self => $class;
+
+	return $self;
+}
+
+sub checkParameters {
+	my $self = shift;
+
+	# TODO need to check module specific parameters
+}
+
+sub fromFeaturesToFile {
+	my $self = shift;
+
+	$self->{_ignoredFeaturesCounters} = {};
+	$self->{_featureCounter} = 0;
+	$self->{_currentFeatureToTreat} = undef;
+	$self->{_currentEMBLFeature} = undef;
+
+	if (defined($self->{'emblFormatName'})) {
+		$logger->debug("\t" . 'EMBL format name: ' . $self->{'emblFormatName'});
+	}
+	$logger->debug("\t" . 'Number of generic features to analyze: ' . scalar(@{$self->{'all_features_ref'}}));
+
+	foreach my $currentFeature (@{$self->{'all_features_ref'}}) {
+		$self->{_currentFeatureToTreat} = $currentFeature;
+		$self->{_currentFeatureToTreat}->{featureType} = $self->{_currentFeatureToTreat}->primary_tag();
+		$self->_addCurrentEMBLFeatureToEMBLFeaturesListIfNeeded();
+		$self->_treatCurrentFeature();
+	}
+	$self->{_currentFeatureToTreat} = undef;
+	$self->_addCurrentEMBLFeatureToEMBLFeaturesListIfNeeded();
+
+	$self->_addJoinedKeywordToFeatureIdentifiers();
+
+	$logger->debug("\t" . 'Number of valid EMBL features to write in the EMBL file: ' . scalar(@{$self->{'listOfEMBLFeatures'}}));
+	while (my ($key, $value) = each(%{$self->{_ignoredFeaturesCounters}})) {
+		$logger->debug("\tNumber of '" .  $key . "' features ignored: " . $value);
+	}
+	$self->_writeEMBLFile();
+}
+
+sub _addCurrentEMBLFeatureToEMBLFeaturesListIfNeeded {
+	my $self = shift;
+
+	if (!defined($self->{_currentEMBLFeature})) {
+		return;
+	}
+
+	# do not add currentEMBLFeature now if currentFeatureToTreat is part of a requested join
+	if ($self->isOptionSetToYesForFeatureType($self->{_currentEMBLFeature}->{featureType}, 'join')
+		&& defined($self->{_currentFeatureToTreat})
+		&& $self->{_currentFeatureToTreat}->{featureType} eq $self->{_currentEMBLFeature}->{featureType}) {
+		return;
+	}
+
+	$self->_treatEMBLFeatureLocations();
+	$self->_treatEMBLFeatureTargets();
+
+	push(@{$self->{listOfEMBLFeatures}}, $self->{_currentEMBLFeature});
+	$self->{_currentEMBLFeature} = undef;
+}
+
+sub _treatCurrentFeature {
+	my $self = shift;
+
+	# Check if currentFeature is to be ignored and count ignored features by type
+	if (! $self->isFeatureToKeep($self->{_currentFeatureToTreat}->{featureType})) {
+		if (!defined($self->{_ignoredFeaturesCounters}->{$self->{_currentFeatureToTreat}->{featureType}})) {
+			$self->{_ignoredFeaturesCounters}->{$self->{_currentFeatureToTreat}->{featureType}} = 0;
+		}
+		$self->{_ignoredFeaturesCounters}->{$self->{_currentFeatureToTreat}->{featureType}} = $self->{_ignoredFeaturesCounters}->{$self->{_currentFeatureToTreat}->{featureType}} + 1;
+		return;
+	}
+
+	if (!defined($self->{_currentEMBLFeature})) {
+		$self->{_featureCounter}++;
+		$self->_createCurrentEMBLFeature($self->{_currentFeatureToTreat}->primary_tag());
+		$self->{_currentEMBLFeature}->{locations} = [];
+		$self->{_currentEMBLFeature}->{targets} = [];
+		$self->{_currentEMBLFeature}->add_tag_value('locus_tag', $self->{'sequenceName'} . '_' . $self->{_currentFeatureToTreat}->source_tag() . '_' . $self->{_featureCounter});
+		$self->_addTagsToCurrentEMBLFeature();
+	}
+
+	$self->_addLocationAndTargetToCurrentEMBLFeature();
+}
+
+sub _addJoinedKeywordToFeatureIdentifiers {
+
+	# Recovers parameters
+	my $self = shift;
+
+	foreach my $feature (@{$self->{'listOfEMBLFeatures'}}) {
+		if ($feature->has_tag('id') && scalar(@{$feature->{locations}}) > 1) {
+			my $identifier = ($feature->get_tag_values('id'))[0];
+			$feature->remove_tag('id');
+			$feature->add_tag_value('id', $identifier . '_joined');
+		}
+	}
+}
+
+sub _addLocationAndTargetToCurrentEMBLFeature {
+	my  $self = shift;
+
+	my $location = Bio::Location::Simple->new( '-start' => $self->{_currentFeatureToTreat}->start(),	'-end' => $self->{_currentFeatureToTreat}->end(), '-strand' => $self->{_currentFeatureToTreat}->strand() );
+	push(@{$self->{_currentEMBLFeature}->{locations}}, $location);
+	if ($self->{_currentFeatureToTreat}->has_tag('Target')) {
+		my @target = $self->{_currentFeatureToTreat}->get_tag_values('Target');
+		push(@{$self->{_currentEMBLFeature}->{targets}}, \@target);
+	}
+}
+
+sub _treatEMBLFeatureLocations {
+
+	# Recovers parameters
+	my ($self) = @_;
+
+	if (!defined($self->{_currentEMBLFeature}->{locations}) || scalar(@{$self->{_currentEMBLFeature}->{locations}}) < 1) {
+		return;
+	}
+
+	# Sort locations depending on the strand
+	my @sortedLocations = undef;
+	if (!defined($self->{_currentEMBLFeature}->{locations}[0]->strand()) || $self->{_currentEMBLFeature}->{locations}[0]->strand() == 1) {
+		@sortedLocations = sort {$a->start <=> $b->start} @{$self->{_currentEMBLFeature}->{locations}};
+	} else {
+		@sortedLocations = sort {$b->start <=> $a->start} @{$self->{_currentEMBLFeature}->{locations}};
+	}
+	$self->{_currentEMBLFeature}->{locations} = \@sortedLocations;
+
+	# Link sorted locations together
+	my $splitLocations = Bio::Location::Split->new();
+	$splitLocations->add_sub_Location(@{$self->{_currentEMBLFeature}->{locations}});
+	$self->{_currentEMBLFeature}->location($splitLocations);
+}
+
+sub _treatEMBLFeatureTargets {
+	my $self = shift;
+	my $targetString = '';
+	my $rangesString = '';
+	if (!defined($self->{_currentEMBLFeature}->{targets}) || scalar(@{$self->{_currentEMBLFeature}->{targets}}) < 1) {
+		return;
+	}
+
+	my @sortedTargets = sort {$a->[1] <=> $b->[1]} @{$self->{_currentEMBLFeature}->{targets}};
+	$self->{_currentEMBLFeature}->{targets} = \@sortedTargets;
+
+	foreach my $target (@{$self->{_currentEMBLFeature}->{targets}}) {
+		if ($targetString eq '') {
+			$targetString = $target->[0];
+		}
+		if ($rangesString ne '') {
+			$rangesString .= ', ';
+		}
+		$rangesString .= $target->[1] . '..' . $target->[2];
+	}
+
+	$self->{_currentEMBLFeature}->add_tag_value('note', "Target: $targetString");
+	$self->{_currentEMBLFeature}->add_tag_value('note', "Ranges: $rangesString");
+}
+
+sub _createCurrentEMBLFeature {
+	my ($self, $primaryTag) = @_;
+
+	# Create tne new valid EMBL feature
+	$self->{_currentEMBLFeature} = Bio::SeqFeature::Generic->new(-seq_id      => $self->{'sequenceName'},
+																 -primary_tag => $primaryTag);
+	$self->{_currentEMBLFeature}->{featureType} = $primaryTag;
+	$self->_renameCurrentEMBLFeaturePrimaryTagIfNeeded();
+}
+
+sub _addTagsToCurrentEMBLFeature {
+
+	# Recovers parameters
+	my $self = shift;
+
+	# Initializations
+	my $featureType = $self->{_currentFeatureToTreat}->{featureType};
+	my $featureToGetTagsFrom = $self->{_currentFeatureToTreat};
+	my %supportedMultiValueTags = map {$_ => 1} ('Target', 'Note', 'structure_warnings', 'status', 'junction_position_on_PCR_product', 'junction_position_on_query_sequence', 'pseudogene', 'partially_sequenced', 'wrong_splice', 'go_annotations', 'pathways_annotations');
+
+	if ($self->isOptionSetToYesForFeatureType($featureType, 'join')) {
+		$featureToGetTagsFrom = $self->getFeatureFromId($self->getParentId($self->{_currentFeatureToTreat}));
+		if (!defined($featureToGetTagsFrom)) {
+			$logger->logdie("currentFeatureToTreat has an invalid parent tag");
+		}
+	}
+
+	# Recovers all Bio::SeqFeature::Generic attributes (GFF field 9) and convert them to EMBL qualifiers
+	my @allTags = $featureToGetTagsFrom->get_all_tags();
+	foreach my $tagName (@allTags) {
+
+		# Get all existing values for the current tag
+		my @tagValues = $featureToGetTagsFrom->get_tag_values($tagName);
+
+		# If the current tag have multiple values, we check if this tag is supported
+		if (scalar(@tagValues) > 1 && !defined($supportedMultiValueTags{$tagName})) {
+			$logger->logdie("EMBLwriter does not support multiple values for tag " . $tagName . " ! A particular case need to be coded..");
+		}
+
+		# Treat ID tag
+		if ($tagName eq 'ID' && defined($TRIANNOT_CONF{'EMBL'}->{'createIdQualifierFromFeatureId'}) && $TRIANNOT_CONF{'EMBL'}->{'createIdQualifierFromFeatureId'} eq 'yes') {
+			$self->{_currentEMBLFeature}->add_tag_value('id', $tagValues[0]);
+		}
+
+		# Do not treat other tags if removeDetails has been set to yes for the current EMBLFormat
+		if ($self->isOptionSetToYesForFeatureType($featureType, 'removeDetails')) {
+			next;
+		}
+
+		# Other tags special treatments
+		if ($tagName eq 'Note') {
+			my $firstNote = shift(@tagValues);
+			if ($featureToGetTagsFrom->primary_tag() eq 'tRNA') {
+				$self->{_currentEMBLFeature}->add_tag_value('function', $firstNote);
+			} else {
+				$self->{_currentEMBLFeature}->add_tag_value('note', 'Similar_to: ' . $firstNote);
+			}
+			foreach my $otherValue (@tagValues){
+				$self->{_currentEMBLFeature}->add_tag_value('note', 'Other_annotation: ' . $otherValue);
+			}
+		} elsif ($tagName eq 'blastp_file'){
+			$self->{_currentEMBLFeature}->add_tag_value('blastp_file', $tagValues[0]);
+		} elsif ($tagName eq 'fasta_file'){
+			$self->{_currentEMBLFeature}->add_tag_value('fasta_file', $tagValues[0]);
+		} elsif ($tagName eq 'status'){
+			foreach my $tagValue (@tagValues) {
+				if ($tagValue eq 'pseudo') {
+					$self->{_currentEMBLFeature}->add_tag_value('pseudogene', 'unknown');
+				} else {
+					$self->{_currentEMBLFeature}->add_tag_value('note', ucfirst($tagValue))
+				}
+			}
+		} elsif ($tagName eq 'structure_warnings'){
+			$self->{_currentEMBLFeature}->add_tag_value('note', 'Structure_warnings: ' . join(' ', @tagValues));
+
+		# The last elsif just below represent the general treatment to apply for any other (ie. not already treated) mono-value and multi-value tags
+		} elsif ($tagName =~ /^[a-z].*/ || $tagName eq 'Ontology_term') {
+			if (defined($supportedMultiValueTags{$tagName})) {
+				# General case for multi-value tags
+				$self->{_currentEMBLFeature}->add_tag_value('note', ucfirst($tagName) .': ' . join(',', @tagValues));
+			} else {
+				# General case for mono-value tags
+				$self->{_currentEMBLFeature}->add_tag_value('note', ucfirst($tagName) . ': ' . $tagValues[0]);
+			}
+		}
+	}
+
+	# Special TAG only used for features of the Gene Model: label (label tag value is not delimitated by quote characters and must be 1 word long at max)
+	if ($featureToGetTagsFrom->source_tag() =~ /CAT/) {
+		$self->{_currentEMBLFeature}->add_tag_value('label', $featureToGetTagsFrom->source_tag());
+	}
+
+	# Get feature color for display in ARTEMIS
+	my $ARTEMIS_color = $self->getEMBLColor($self->{_currentFeatureToTreat}->source_tag());
+	if ($ARTEMIS_color ne '') {
+		$self->{_currentEMBLFeature}->add_tag_value('color', $ARTEMIS_color);
+	}
+}
+
+sub getParentId {
+	my ($self, $feature) = @_;
+
+	if ($feature->has_tag('Derives_from')) {
+		my @values = $feature->get_tag_values('Derives_from');
+		return $values[0];
+	} elsif ($feature->has_tag('Parent')) {
+		my @values = $feature->get_tag_values('Parent');
+		return $values[0];
+	} else {
+		return undef;
+	}
+}
+
+sub getFeatureFromId {
+	my ($self, $featureId) = @_;
+
+	if (!defined($featureId)) {
+		return undef;
+	}
+
+	foreach my $feature (@{$self->{all_features_ref}}) {
+		my @idValues = $feature->get_tag_values('ID');
+		if ($idValues[0] eq $featureId) {
+			return $feature;
+		}
+	}
+	return undef;
+}
+
+# Determine the appropriate ARTEMIS color for the given feature source
+sub getEMBLColor {
+	my ($self, $Feature_source) = @_;
+
+	my $Selected_color = '';
+	my $database = '';
+	if (defined($self->{parserObject}->{database})) {
+		$database = $self->{parserObject}->{database};
+	}
+	my $type = '';
+	if (defined($self->{parserObject}->{type})) {
+		$type = $self->{parserObject}->{type};
+	}
+
+	# Get feature color from configuration file
+	if (defined($TRIANNOT_CONF{EMBL}->{EMBLColors}->{$Feature_source})) {
+		# Color defined by feature source (ex CAT01, CAT02...)
+		return $TRIANNOT_CONF{EMBL}->{EMBLColors}->{$Feature_source};
+
+	}
+	if (defined($TRIANNOT_CONF{EMBL}->{EMBLColors}->{$self->{parserObject}->{programName} . '_' . $database})) {
+		# Color defined by a couple "ProgramName + DBName" (Ex: RepeatMasker_TREP_plus)
+		return $TRIANNOT_CONF{EMBL}->{EMBLColors}->{$self->{parserObject}->{programName} . '_' . $database};
+
+	}
+	if (defined($TRIANNOT_CONF{EMBL}->{EMBLColors}->{$type . '_' . $database})) {
+		# Color defined by a couple "TYPE + DBName" (Ex: BLASTX_TREP_prot). Type must be upper-case in config file.
+		return $TRIANNOT_CONF{EMBL}->{EMBLColors}->{$self->{parserObject}->{type} . '_' . $database};
+
+	}
+	if (defined($TRIANNOT_CONF{EMBL}->{EMBLColors}->{$type})) {
+		# Color defined by "TYPE" (Ex: BLASTX). Type must be upper-case in config file.
+		return $TRIANNOT_CONF{EMBL}->{EMBLColors}->{$self->{parserObject}->{type}};
+
+	}
+	if (defined($TRIANNOT_CONF{EMBL}->{EMBLColors}->{$self->{parserObject}->{programName}})) {
+		# Color defined by "ProgramName" (Ex: GMAP)
+		return $TRIANNOT_CONF{EMBL}->{EMBLColors}->{$self->{parserObject}->{programName}};
+	}
+
+	return $Selected_color;
+}
+
+sub _renameCurrentEMBLFeaturePrimaryTagIfNeeded {
+	my $self = shift;
+
+	my $primaryTag = $self->{_currentEMBLFeature}->primary_tag();
+
+	my $customPrimaryTag = $TRIANNOT_CONF{$self->{parserObject}->{programName}}->{'EMBLRename.' . $self->{_currentEMBLFeature}->{featureType}};
+	if (defined($self->{parserObject}->{'EMBLRename.' . $self->{_currentEMBLFeature}->{featureType}})) {
+		$customPrimaryTag = $self->{parserObject}->{'EMBLRename.' . $self->{_currentEMBLFeature}->{featureType}};
+	}
+	$customPrimaryTag = $self->_parseCustomPrimaryTag($customPrimaryTag);
+	if (defined($customPrimaryTag)) {
+		$primaryTag = $customPrimaryTag;
+	}
+
+	# InterProScan special case (Replace "polypeptide_domain_part" by the application name)
+	if ($primaryTag eq 'polypeptide_domain_part' || $primaryTag eq 'polypeptide_domain') {
+		$primaryTag = $self->{_currentFeatureToTreat}->source_tag();
+	}
+
+	# Remove minibank default prefix from primary tag if present
+	$primaryTag =~ s/_Mini_/_/;
+
+	if (length($primaryTag) > 15) {
+		$self->{_currentEMBLFeature}->add_tag_value('note', 'Full_primary_tag: ' . $primaryTag);
+		$primaryTag = substr($primaryTag, 0, 15);
+	}
+
+	$self->{_currentEMBLFeature}->primary_tag($primaryTag);
+}
+
+sub _parseCustomPrimaryTag {
+	my ($self, $customPrimaryTag) = @_;
+
+	if (defined($customPrimaryTag) && $customPrimaryTag =~ /^\s$/) {
+		$customPrimaryTag = undef;
+	}
+
+	if (defined($customPrimaryTag)) {
+		my $pattern1 = '(\{(.+?)\})';
+		while ($customPrimaryTag =~ m/$pattern1/g) {
+			if (!defined($self->{parserObject}->{$2})) {
+				$logger->logwarn("Invalid custom Tag pattern for EMBLWriter. Will not rename " . $self->{_currentEMBLFeature}->{featureType} . " features: " . $customPrimaryTag);
+				$customPrimaryTag = undef;
+				last;
+			}
+			else {
+				my $newValue = $self->{parserObject}->{$2};
+				$customPrimaryTag =~ s/\Q$1/$newValue/g;
+			}
+		}
+	}
+
+	return $customPrimaryTag;
+}
+
+######################
+# "Is a" methods
+######################
+
+sub isFeatureToKeep {
+	# Recovers parameters
+	my ($self, $featureType) = @_;
+
+	# We keep the feature "as is" if there is no EMBLFormat defined or if the selected EMBLFormat does not exists in the TriAnnotConfig_EMBL XML configuration file
+	if (!defined($self->{'emblFormatName'}) || !defined($self->{'emblFormatDescription'})) {
+		return 1; #TRUE
+	}
+
+	# We also keep the feature if there is instructions for its type in the EMBL format description
+	if (defined($self->{'emblFormatDescription'}->{$featureType})) {
+		return 1; #TRUE
+	}
+
+	return 0; #FALSE
+}
+
+sub isOptionSetToYesForFeatureType {
+	# Recovers parameters
+	my ($self, $featureType, $optionName) = @_;
+
+	# Initializations
+	if (defined($self->{'emblFormatName'})
+		&& defined($self->{'emblFormatDescription'})
+		&& defined($self->{'emblFormatDescription'}->{$featureType})
+		&& defined($self->{'emblFormatDescription'}->{$featureType}->{$optionName})
+		&& $self->{'emblFormatDescription'}->{$featureType}->{$optionName} eq 'yes') {
+
+		return 1; #TRUE
+	}
+
+	return 0; #FALSE
+}
+
+############################
+# EMBL file real writer
+############################
+
+# Write all clean features in an EMBL file
+sub _writeEMBLFile {
+	my $self = shift;
+	my $sequence = undef;
+
+	# Add sequence in EMBL files, only for the GeneModel and RepeatMasker (this is necessary whene no GeneModel is generated).
+	if ($self->{parserObject}->{programName} eq 'FuncAnnot' || $self->{parserObject}->{programName} eq 'RepeatMasker' || $self->{parserObject}->{programName} eq 'MergeGeneModels') {
+		# Recovers the sequence from the fasta file.
+		my $sequenceSeqIO  = Bio::SeqIO->new ( '-file' => $self->{'fullSequencePath'}, '-format' => 'FASTA' );
+		$sequence  = $sequenceSeqIO->next_seq->seq;
+	}
+	my $EMBLObject  = Bio::Seq->new ( '-id' => $self->{parserObject}->{programName}, '-alphabet' => 'dna', -seq => $sequence);
+
+	$EMBLObject->add_SeqFeature(@{$self->{'listOfEMBLFeatures'}});
+
+	# Write EMBL file
+	my $seqIO = Bio::SeqIO->new ( '-file' => '>' . $self->{parserObject}->{'emblFileFullPath'} , '-format' => 'EMBLTRIANNOT' );
+	$seqIO->verbose(-1);
+	$seqIO->write_seq($EMBLObject);
+}
+
+1;

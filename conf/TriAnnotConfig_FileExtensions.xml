@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<!-- Please have a look at the following wiki page before editing this file: https://sourcesup.renater.fr/wiki/triannot/configuration:customize_triannotconfig_fileextensions.xml -->
+
+	<section name="DatabaseFilesExtensions" description="A biological database is often made of several files. Here we define which file extensions are allowed for each file of each database used as input in TriAnnot">
+		<entry key="Fasta">
+			<entry key="MandatoryFiles">
+				<entry key="main" description="Standard Fasta file">
+					<entry key="PossibleExtensions">
+						<entry>.fasta</entry>
+						<entry>.fsa</entry>
+						<entry>.fna</entry>
+						<entry>.fas</entry>
+						<entry>.faa</entry>
+						<entry>.tfa</entry>
+					</entry>
+				</entry>
+			</entry>
+		</entry>
+
+		<entry key="NucleicBlast">
+			<entry key="BlastVolumeFileExtension">.nal</entry>
+			<entry key="MandatoryFiles">
+				<entry description="First file created by formatdb/makeblastdb (default options)">
+					<entry key="PossibleExtensions">
+						<entry>.nhr</entry>
+					</entry>
+				</entry>
+				<entry description="Second file created by formatdb/makeblastdb (default options)">
+					<entry key="PossibleExtensions">
+						<entry>.nin</entry>
+					</entry>
+				</entry>
+				<entry description="Third file created by formatdb/makeblastdb (default options)">
+					<entry key="PossibleExtensions">
+						<entry>.nsq</entry>
+					</entry>
+				</entry>
+				<entry description="First index file created by formatdb when used with -o T / makeblastdb when used with -parse_seqids or -hash_index">
+					<entry key="PossibleExtensions">
+						<entry>.nsi</entry>
+					</entry>
+				</entry>
+				<entry description="Second index file created by formatdb when used with -o T / makeblastdb when used with -parse_seqids or -hash_index">
+					<entry key="PossibleExtensions">
+						<entry>.nsd</entry>
+					</entry>
+				</entry>
+			</entry>
+		</entry>
+
+		<entry key="ProteicBlast">
+			<entry key="BlastVolumeFileExtension">.pal</entry>
+			<entry key="MandatoryFiles">
+				<entry description="First file created by formatdb/makeblastdb (default options)">
+					<entry key="PossibleExtensions">
+						<entry>.phr</entry>
+					</entry>
+				</entry>
+				<entry description="Second file created by formatdb/makeblastdb (default options)">
+					<entry key="PossibleExtensions">
+						<entry>.pin</entry>
+					</entry>
+				</entry>
+				<entry description="Third file created by formatdb/makeblastdb (default options)">
+					<entry key="PossibleExtensions">
+						<entry>.psq</entry>
+					</entry>
+				</entry>
+				<entry description="First index file created by formatdb when used with -o T / makeblastdb when used with -parse_seqids or -hash_index">
+					<entry key="PossibleExtensions">
+						<entry>.psi</entry>
+					</entry>
+				</entry>
+				<entry description="Second index file created by formatdb when used with -o T / makeblastdb when used with -parse_seqids or -hash_index">
+					<entry key="PossibleExtensions">
+						<entry>.psd</entry>
+					</entry>
+				</entry>
+			</entry>
+		</entry>
+
+		<entry key="HMM">
+			<entry key="MandatoryFiles">
+				<entry key="main" description="Uncompressed HMM library file (HMMER3 format)">
+					<entry key="PossibleExtensions">
+						<entry>.hmm</entry>
+						<entry></entry>
+					</entry>
+				</entry>
+				<entry description="Binary compressed datafiles created by hmmpress (1)">
+					<entry key="PossibleExtensions">
+						<entry>.hmm.h3f</entry>
+						<entry>.h3f</entry>
+					</entry>
+				</entry>
+				<entry description="Binary compressed datafiles created by hmmpress (2)">
+					<entry key="PossibleExtensions">
+						<entry>.hmm.h3i</entry>
+						<entry>.h3i</entry>
+					</entry>
+				</entry>
+				<entry description="Binary compressed datafiles created by hmmpress (3)">
+					<entry key="PossibleExtensions">
+						<entry>.hmm.h3m</entry>
+						<entry>.h3m</entry>
+					</entry>
+				</entry>
+				<entry description="Binary compressed datafiles created by hmmpress (4)">
+					<entry key="PossibleExtensions">
+						<entry>.hmm.h3p</entry>
+						<entry>.h3p</entry>
+					</entry>
+				</entry>
+			</entry>
+		</entry>
+
+		<entry key="Infernal">
+			<entry key="MandatoryFiles">
+				<entry key="main" description="Uncompressed Covariance Model database (Infernal 1.x format)">
+					<entry key="PossibleExtensions">
+						<entry>.cm</entry>
+						<entry></entry>
+					</entry>
+				</entry>
+				<entry description="Binary compressed datafiles created by cmpress (1)">
+					<entry key="PossibleExtensions">
+						<entry>.cm.i1f</entry>
+						<entry>.i1f</entry>
+					</entry>
+				</entry>
+				<entry description="Binary compressed datafiles created by cmpress (2)">
+					<entry key="PossibleExtensions">
+						<entry>.cm.i1i</entry>
+						<entry>.i1i</entry>
+					</entry>
+				</entry>
+				<entry description="Binary compressed datafiles created by cmpress (3)">
+					<entry key="PossibleExtensions">
+						<entry>.cm.i1m</entry>
+						<entry>.i1m</entry>
+					</entry>
+				</entry>
+				<entry description="Binary compressed datafiles created by cmpress (4)">
+					<entry key="PossibleExtensions">
+						<entry>.cm.i1p</entry>
+						<entry>.i1p</entry>
+					</entry>
+				</entry>
+			</entry>
+		</entry>
+
+		<entry key="ClariTE">
+			<entry key="MandatoryFiles">
+				<entry description="Tabular file containing the TE classification to use">
+					<entry key="PossibleExtensions">
+						<entry>.classification</entry>
+						<entry>.classif</entry>
+						<entry></entry>
+					</entry>
+				</entry>
+				<entry description="Tabular file containing the position of the LTR retrotransposons">
+					<entry key="PossibleExtensions">
+						<entry>.LTR_position</entry>
+						<entry>.ltr</entry>
+						<entry>.position</entry>
+					</entry>
+				</entry>
+			</entry>
+		</entry>
+
+	</section>
+
+
+	<section name="IndexFilesExtensions" description="An index is often made of several files. Here we define which file extensions are allowed for each file of each index used as input in some TriAnnot tools">
+
+		<entry key="GTtallymer">
+			<entry key="MandatoryFiles">
+				<entry description="Main index file">
+					<entry key="PossibleExtensions">
+						<entry>.mer</entry>
+					</entry>
+				</entry>
+				<entry description="Additional file generated if the -pl option has been used during the index creation process">
+					<entry key="PossibleExtensions">
+						<entry>.mbd</entry>
+					</entry>
+				</entry>
+				<entry description="Additional file generated if the -counts option has been used during the index creation process">
+					<entry key="PossibleExtensions">
+						<entry>.mct</entry>
+					</entry>
+				</entry>
+			</entry>
+		</entry>
+
+	</section>
+
+</triannotConf>

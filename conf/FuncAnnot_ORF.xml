@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="FuncAnnot_ORF">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|Blast|bin</entry>
+			<entry>FuncAnnot</entry>
+		</entry>
+
+		<entry key="additionalConfigurationSectionsToInclude" description="List of configuration sections that defines other parameters that will be included in this section during the loading procedure">
+			<entry>FuncAnnot</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<entry key="database_STEP01">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|db</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="listOfValuesFilter">
+					<entry key="filterPath">availableFormats</entry>
+					<entry key="filterMode">values</entry>
+					<entry key="filterAllowedValues">
+						<entry>ProteicBlast</entry>
+					</entry>
+				</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<entry key="featureTypeToAnnotate" description="Type of feature that you want to annotate">
+				<entry key="defaultValue">ORF</entry>
+				<entry key="type">string</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_PSEUDOGENE.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_PSEUDOGENE.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|ORF</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">ORFOnly</entry>
+			</entry>
+
+			<entry key="EMBLRename.ORF">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="AnnotationSteps">
+			<entry key="annotationProcedureName">ORF</entry>
+			<entry key="STEP01">
+				<entry key="programName">Blast</entry>
+				<entry key="type">blastx</entry>
+				<entry key="evalue">1e-1</entry>
+				<entry key="concatQueries">1</entry>
+				<entry key="concatDb">1</entry>
+				<entry key="performAlign">T</entry>
+				<entry key="filterSeq">F</entry>
+				<entry key="annotation_class">putative_pseudogene</entry>
+				<entry key="identityCutOff">40</entry>
+				<entry key="coverageCutOff">5</entry>
+			</entry>
+			<entry key="NoResultMessage">No_biological_evidence</entry>
+		</entry>
+
+	</section>
+</triannotConf>

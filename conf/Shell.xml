@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="Shell">
+
+		<entry key="execParameters">
+			<entry key="cmd" description="The command to execute. It can be the full path to a script file or a shell command line with multiple commands separated by semicolons. The command execution folder will be the task subfolder in your TriAnnot analysis (for example 014_Shell_execution)">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="isArray">yes</entry>
+			</entry>
+			<entry key="outFile" description="Name of the main out file from your command line. If this file does not exists at the end of execution, the Shell execution will be considered as failed. If this parameter is left empty, the Shell execution will allways be considered as successfull">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+			<entry key="moveOutFileToKeepFilesFolder" description="If this parameter is set to 'yes', the file set in outFile parameter will be moved to the keep_files folder. Possible values are: yes, no">
+				<entry key="defaultValue">no</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+		</entry>
+
+	</section>
+</triannotConf>

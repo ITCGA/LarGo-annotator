@@ -1,0 +1,1403 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+<!--last modification September 4th, 2016 - P. Leroy -->
+
+	<!-- Please have a look at the following wiki page before editing this file: https://sourcesup.renater.fr/wiki/triannot/configuration:customize_triannotconfig_paths.xml -->
+
+	<section name="PATHS">
+		<!-- Global path -->
+		<entry key="defaultDbPath">/work2/706lab/TriAnnot_databank</entry>
+
+		<!-- Databanks -->
+		<entry key="db">
+			<!-- You need to add an entry for each databank that you want to use in TriAnnot -->
+			<entry key="PFAMAhmm">
+				<entry key="version">v30</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/5_Protein_Domain/PFAMAhmm_v30</entry>
+				<entry key="availableFormats">
+					<entry>HMM</entry>
+				</entry>
+			</entry>
+
+			<!-- BLAST/Exonerate - Gene mapping -->
+			<entry key="HVUrnaseq">
+				<entry key="version">v1</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/NCBI_RNA-seq/NCBI_Hordeum_vulgare_mRNA.fasta</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="QUERrnaseq">
+				<entry key="version">v1</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/NCBI_RNA-seq/QUERrnaseq_v1</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<!--entry key="TAErnaseqMIPS">
+				<entry key="version">v1</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/MIPS/ta_IWGSC_MIPSv2.2_LowConf_TRANSCRIPT_2014Jul18.fa</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+			<!--entry key="TAErnaseq7DS">
+				<entry key="version">v1601</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/TAErnaseq7DS_v1601</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+			<!--entry key="TAErnaseq1B">
+				<entry key="version">v1601</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/TAErnaseq1B_v1601</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+			<entry key="TAErnaseqNRgene">
+				<entry key="version">v1602</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/ForXiaoli/TAErnaseqNRgene_v1602</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="TAErnaseqDong">
+				<entry key="version">vSRR3018829</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/ForXiaoli/TAErnaseqDong_vSRR3018829</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<!--entry key="TDUrnaseq">
+				<entry key="version">v1404</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/TDUrnaseq_v1404</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+			<!--entry key="ZMArnaseq">
+				<entry key="version">v2016</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+			
+			<entry key="ARABfcdna">
+				<entry key="version">v121</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/Arabidopsis_flcdna.fasta</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+
+			<!--entry key="HORDfcdna">
+				<entry key="version">v121</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/Hordeum_flcdna.fasta</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+			<entry key="HORDest">
+				<entry key="version">v116</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/Hordeum_only_est.fasta</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+
+			<!--entry key="ORYZfcdna">
+				<entry key="version">v121</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/ORYZfcdna_v121</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+			<!--entry key="ORYZest">
+				<entry key="version">v1136</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/ORYZest_v116</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+
+			<entry key="TRITfcdnaplus">
+				<entry key="version">v128</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/Triticum_Full-Length_cDNA/Tritflcdna</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="TRITest">
+				<entry key="version">v126</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/Triticum_EST.fasta</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+
+			<!--entry key="ZEAMfcdna">
+				<entry key="version">v121</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/Zea_flcdna.fasta</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+			<entry key="ZEAMest">
+				<entry key="version">v116</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/Zea_only_est.fasta</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+
+			<entry key="PRUNfcdna">
+				<entry key="version">v121</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/Prunus_flcdna.fasta</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+
+			<entry key="POPUfcdna">
+				<entry key="version">v121</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/Populus_flcdna.fasta</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+
+			<entry key="POACfcdna">
+				<entry key="version">v121</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/Poaceae_flcdna.fasta</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+
+			<!--entry key="est">
+				<entry key="version">v116</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/QUERest_v116</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+
+			<!--entry key="ROSIfcdna">
+				<entry key="version">v127</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/Rosids_flcdna.fasta</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+			<!--entry key="MALPest">
+				<entry key="version">v127</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/MALPest_v127</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+
+			<!--entry key="MAGNfcdna">
+				<entry key="version">v121</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/Magnoliophyta_flcdna.fasta</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+			<!--entry key="MAGNmrna">
+				<entry key="version">v121</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/Magnoliophyta_only_est.fasta</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+
+			<entry key="ATHcds">
+				<entry key="version">v10</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.cds.all.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="HVUcdshc">
+				<entry key="version">v2012</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Hordeum_vulgare/barley_HighConf_genes_MIPS_23Mar12_CDSSeq.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="HVUcdslc">
+				<entry key="version">v2012</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Hordeum_vulgare/barley_LowConf_genes_MIPS_23Mar12_CDSSeq.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="OSAcdsirgsp">
+				<entry key="version">v1a</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Oryza_sativa_RAP-DB/IRGSP-1.0_cds_2014-03-05.fasta</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="BDIcds">
+				<entry key="version">v192</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Brachypodium_distachyon/Brachypodium_distachyon.v1.0.cds.all.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="BRAcds">
+				<entry key="version">v197</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Brassica_rapa/Brassica_rapa.IVFCAASv1.cds.all.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="GMAcds">
+				<entry key="version">v189</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Glycin_max/Glycine_max.V1.0.cds.all.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="MTRcds">
+				<entry key="version">v198</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Medicago_trunculata/Medicago_truncatula.MedtrA17_4.0.cds.all.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="OSAcds">
+				<entry key="version">v204</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Oryza_sativa_MSU/Osativa_204_cds.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="PPEcds">
+				<entry key="version">v139</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Prunus_persica/Ppersica_139_cds.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="PTRcds">
+				<entry key="version">v210</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Populus_trichocarpa/Ptrichocarpa_210_cds.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="SITcds">
+				<entry key="version">v164</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Setaria_italica/Setaria_italica.JGIv2.0.cds.all.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="SBIcds">
+				<entry key="version">v79</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Sorghum_bicolor/Sbicolor_79_cds.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="SLYcds">
+				<entry key="version">v225</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Solanum_lycopersicum/Solanum_lycopersicum.SL2.50.cds.all.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="TCAcds">
+				<entry key="version">v233</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Theobroma_cacao/Tcacao_233_cds.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="VVIcds">
+				<entry key="version">v145</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Vitis_vinefera/Vvinifera_145_cds.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="ZMAcds">
+				<entry key="version">v181</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Zea_mays/Zmays_181_cds.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+
+			<entry key="SIMDBwheatnuc">
+			 	<entry key="version">v1410</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/ForXiaoli/SIMDBwheatnuc_v1611</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<!--entry key="SIMDBbarleynuc">
+			 	<entry key="version">v1410</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/SIMDBbarleynuc_v1410</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+			<!--entry key="SIMDBricenuc">
+			 	<entry key="version">v1410</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/SIMDBricenuc_v1410</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+			<!--entry key="SIMDBmaizenuc">
+			 	<entry key="version">v1410</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/SIMDBmaizenuc_v1410</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+			<!--entry key="SIMDBoaknuc">
+				<entry key="version">v1410</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/SIMDBoaknuc_v1410</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+			<!--entry key="SIMDBpassiflornuc">
+				<entry key="version">v1607</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/SIMDBpassiflornuc_v1607</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+
+			<!-- BLASTn - Similarity search against Plant model Scaffolds/pseudomolecules -->
+			<entry key="ATAgeno">
+				<entry key="version">v1302</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Aegllops_tauschii/Aegilops_tauschii.fasta</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="ATHgeno">
+				<entry key="version">v10</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Arabidopsis_thaliana/Arabidopsis_thaliana.TAIR10.dna_rm.chromosome.1.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="HVUgeno">
+				<entry key="version">v2012</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Hordeum_vulgare/Hordeum_vulgare.ASM32608v1.dna_rm.chromosome.1.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="OSAgenoirgsp">
+				<entry key="version">v1</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Oryza_sativa_RAP-DB/IRGSP-1.0_genome.fasta</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="TURgeno">
+				<entry key="version">v1302</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/Tu_genome.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="BDIgeno">
+				<entry key="version">v192</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Brachypodium_distachyon/Brachypodium_distachyon.v1.0.dna_rm.chromosome.1.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="BRAgeno">
+				<entry key="version">v197</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Brassica_rapa/Brassica_rapa.IVFCAASv1.dna_rm.chromosome.A01.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="GMAgeno">
+				<entry key="version">v189</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Glycin_max/Glycine_max.V1.0.dna_rm.chromosome.1.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="MTRgeno">
+				<entry key="version">v198</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Medicago_trunculata/Medicago_truncatula.MedtrA17_4.0.dna_rm.chromosome.1.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="OSAgeno">
+				<entry key="version">v204</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Oryza_sativa_MSU/Oryza_sativa.IRGSP-1.0.dna_rm.chromosome.1.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="PPEgeno">
+				<entry key="version">v139</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Prunus_persica/Ppersica_139_hardmasked.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="PTRgeno">
+				<entry key="version">v210</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Populus_trichocarpa/Ptrichocarpa_210_hardmasked.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="SITgeno">
+				<entry key="version">v164</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Setaria_italica/Setaria_italica.JGIv2.0.dna_rm.chromosome.1.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="SBIgeno">
+				<entry key="version">v79</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Sorghum_bicolor/Sorghum_bicolor.Sorbi1.dna_rm.chromosome.1.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="SLYgeno">
+				<entry key="version">v225</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Solanum_lycopersicum/Solanum_lycopersicum.SL2.50.dna_rm.chromosome.1.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="TCAgeno">
+				<entry key="version">v233</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Theobroma_cacao/Tcacao_233_hardmasked.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="VVIgeno">
+				<entry key="version">v145</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Vitis_vinefera/Vvinifera_145_hardmasked.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="ZMAgeno">
+				<entry key="version">v181</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Zea_mays/Zmays_181_hardmasked.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+
+			<!-- BLASTn - Similarity search against TGAC genome assemblies -->
+			<entry key="ASHgenotgac">
+				<entry key="version">v1</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/7_Other_genome_ressources_from_TGAC/TGAC_WGS_sharonensis_v1.fasta</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="ATAgenotgac">
+				<entry key="version">v1</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/7_Other_genome_ressources_from_TGAC/TGAC_WGS_tauschii_v1.fasta</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="TDUgenotgac">
+				<entry key="version">v1</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/7_Other_genome_ressources_from_TGAC/TGAC_WGS_durum_v1.fasta</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="TMOgenotgac">
+				<entry key="version">v1</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/7_Other_genome_ressources_from_TGAC/TGAC_WGS_monococcum_v1.fasta</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="TSPgenotgac">
+				<entry key="version">v1</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/7_Other_genome_ressources_from_TGAC/TGAC_WGS_speltoides_v1.fasta</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="TURgenotgac">
+				<entry key="version">v1</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/7_Other_genome_ressources_from_TGAC/TGAC_WGS_urartu_v1.fasta</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="TURstgenotgac">
+				<entry key="version">v1</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/7_Other_genome_ressources_from_TGAC/TGAC_WGS_strongfield_v1.fasta</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+
+			<!-- BLASTn - Re map previous annotations -->
+			<!--entry key="TAEcds3bseb">
+				<entry key="version">v4.4</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/TAEcds3bseb_v4-4</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+
+			<!-- BLASTn - SNPs H. Rimbert -->
+			<!--entry key="SNPs">
+				<entry key="version">v1310</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/trit_snp_v1310</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+
+			<!-- BLASTn - Other Biological Target search against plant organelle genomes -->
+			<!--entry key="VIRIrefcp">
+				<entry key="version">v1309</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/VIRIrefcp_v1309</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+			<!--entry key="VIRIrefmt">
+				<entry key="version">v1309</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/VIRIrefmt_v1309</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+
+			<entry key="TRITchloro">
+				<entry key="version">v126</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/NCBI_RefSeq/plastid.1.1.genomic.fna</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="TRITmito">
+				<entry key="version">v126</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/NCBI_RefSeq/mitochondrion.1.1.genomic.fna</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			
+			<!-- BLASTp and BLASTx - Protein databanks -->
+			<entry key="SWISSprot">
+				<entry key="version">v2016-01</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/4_Protein_Databanks/UniProtKB_Swissprot_8/uniprot_sprot.fasta</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+
+			<entry key="ATAprp">
+				<entry key="version">v1604</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/4_Protein_Databanks/Aegilops_tauschii_protein.fasta</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="ATApepnfs">
+				<entry key="version">v2016</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Aegllops_tauschii/Aegilops_tauschii_peptide.fasta</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+
+			<entry key="BRACprp">
+				<entry key="version">v1604</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Brachypodium_distachyon/Brachypodium_distachyon.v1.0.pep.all.fa</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="HORDprp">
+				<entry key="version">v1604</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/4_Protein_Databanks/Hordeum_protein.fasta</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="ORYZprp">
+				<entry key="version">v1604</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/4_Protein_Databanks/Oryza_protein.fasta</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="SORGprp">
+				<entry key="version">v1604</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Sorghum_bicolor/Sbicolor_79_protein.fa</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<!--entry key="TRITprp">
+				<entry key="version">v1605</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/4_Protein_Databanks/Triticum_protein.fasta</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry-->
+			<entry key="TURprp">
+				<entry key="version">v1604</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/WheatTu_Chr.IGDBV1_Final.pros.long.fasta</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="ZEAMprp">
+				<entry key="version">v1604</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Zea_mays/Zmays_181_protein.fa</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+
+			<!--entry key="POACprot">
+				<entry key="version">v2016-05</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/4_Protein_Databanks/Poaceae_protein.fasta</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry-->
+			<!--entry key="PASSprot">
+				<entry key="version">v2016-05</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/PASSprot_v2016-05</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry-->
+			<entry key="MAGNprot">
+				<entry key="version">v2016-01</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/4_Protein_Databanks/Magnoliophyta_protein.fasta</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<!--entry key="ROSIprot">
+				<entry key="version">v2016-05</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/4_Protein_Databanks/Rosids_protein.fasta</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry-->
+			
+			<entry key="ARABprot">
+				<entry key="version">v2016-02</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Arabidopsis_thaliana/TAIR10_pep_20101214_001</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="GLYCprot">
+				<entry key="version">v2013-09</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/ForXiaoli/GLYCprot_v2013-09</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<!--entry key="POPUprot">
+				<entry key="version">v2013-09</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/4_Protein_Databanks/Populus_protein.fasta</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry-->
+			<!--entry key="PRUNprot">
+				<entry key="version">v2013-09</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/4_Protein_Databanks/Prunus_protein.fasta</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry-->
+			<entry key="SACCprot">
+				<entry key="version">v2014-09</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/4_Protein_Databanks/Saccharum_protein.fasta</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<!--entry key="SETAprot">
+				<entry key="version">v2013-09</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/4_Protein_Databanks/Setaria_protein.fasta</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry-->
+			<entry key="TRITprot">
+				<entry key="version">v2016-01</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/Triticum_aestivum.TGACv1.pep.all.fa</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="VITIprot">
+				<entry key="version">v2013-09</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/ForXiaoli/VITIprot_v2013-09</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+
+			<entry key="ATHpep">
+				<entry key="version">v10</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Arabidopsis_thaliana/TAIR10_pep_20101214_001</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<!--entry key="MESpep">
+				<entry key="version">v6-1</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/MESpep_v6-1</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry-->
+			<entry key="BRApep">
+				<entry key="version">v197</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Brassica_rapa/Brassica_rapa.IVFCAASv1.pep.all.fa</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="GMApep">
+				<entry key="version">v189</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Glycin_max/Glycine_max.V1.0.pep.all.fa</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="MTRpep">
+				<entry key="version">v198</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Medicago_trunculata/Medicago_truncatula.MedtrA17_4.0.pep.all.fa</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="OSApep">
+				<entry key="version">v204</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Oryza_sativa_MSU/Osativa_204_protein.fa</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="OSApepirgsp">
+				<entry key="version">v1a</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Oryza_sativa_RAP-DB/IRGSP-1.0_protein_2014-03-05.fasta</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="PPEpep">
+				<entry key="version">v139</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Prunus_persica/Ppersica_139_protein.fa</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="PTRpep">
+				<entry key="version">v3-0</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Populus_trichocarpa/Ptrichocarpa_210_protein.fa</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<!--entry key="RCOpep">
+				<entry key="version">v1-0</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/RCOpep_v1-0</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry-->
+			<entry key="SITpep">
+				<entry key="version">v164</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Setaria_italica/Setaria_italica.JGIv2.0.pep.all.fa</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="SLYpep">
+				<entry key="version">v225</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Solanum_lycopersicum/Slycopersicum_225_protein.fa</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<!--entry key="SPUpep">
+				<entry key="version">v1-0</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/SPUpep_v1-0</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry-->
+			<entry key="TCApep">
+				<entry key="version">v233</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Theobroma_cacao/Tcacao_233_protein.fa</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="VVIpep">
+				<entry key="version">v145</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Vitis_vinefera/Vvinifera_145_protein.fa</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+
+			<entry key="ZMApepB73">
+				<entry key="version">v1601</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/6_Genome_models_CDS_CDS-derived_peptides/Zea_mays/Zmays_181_protein.fa</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+
+			<entry key="TAEtfpep">
+				<entry key="version">v1403</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/Tae_pep.fas</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="GDECFpeporf">
+				<entry key="version">v14154</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/ForXiaoli/GDECFpeporf_v14154</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+
+			<!-- Data Bank for BLASTx-Exonerate - GeneModel -->
+			<!--entry key="RefProtMethForAegPipe">
+				<entry key="version">v1605</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/RefProtMethForAegPipe_v1605</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry-->
+			<!--entry key="RefProtMethForPassiflorPipe">
+				<entry key="version">v1606</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/RefProtMethForPassiflorPipe_v1606</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry-->
+			<entry key="RefProtMethForWheatPipe">
+				<entry key="version">v1604</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/ForXiaoli/RefProtMethForWheatPipe_v1611</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<!--entry key="POACprotwnmaizMeth">
+				<entry key="version">v2016-06</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/POACprotwnmaizMeth_v2016-06</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry-->
+			
+			<!-- BLASTx - Repeats and Transposable Elements Annotation // Available in Fasta and Blast format -->
+			<entry key="TREPPprot">
+				<entry key="version">v10</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/1_Transposable_Elements_repeat_databanks/TREP-GrainGenes/trep-db_proteins_single.fasta</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+
+			<!-- RepeatMasker - Repeats and Transposable Elements Masking/Annotation // Available in Fasta format only -->
+			<!--entry key="EUDIrepeatplus">
+				<entry key="version">v1308</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/1_Transposable_Elements_repeat_databanks/MIPS_repeats/mipsREdat_9.3p_Eudicot_TEs.fasta</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+			<entry key="POACrepeatplus">
+				<entry key="version">v1308</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/1_Transposable_Elements_repeat_databanks/MIPS_repeats/mipsREdat_9.3p_Poaceae_TEs</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<!--entry key="ZMArepeat">
+				<entry key="version">v2015</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/repeat_maize_v2015</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+
+			<entry key="CLARIrepeatwheat">
+				<entry key="version">v1410</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/../TriAnnot_software/clariTE_1.0/databank/CLARIwheat</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+					<entry>ClariTE</entry>
+				</entry>
+			</entry>
+			
+			<entry key="UNIVEnuc">
+				<entry key="version">v7.1</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/2_Other_Databanks/UniVec</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="ECOgeno">
+				<entry key="version">v116</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/2_Other_Databanks/Ecoli_K12_W3110_genomic</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="SPESQnuc">
+				<entry key="version">v1301</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/ForXiaoli/SPESQnuc_v1301</entry>
+				<entry key="availableFormats">
+					<entry>Fasta</entry>
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+
+            <!-- Infernal - Covariance models databases -->
+            <!-- Rfam is a database of structure-annotated multiple sequence alignments, covariance models and family annotation for a number of non-coding RNA, cis-regulatory and self-splicing intron families -->
+            <entry key="RFAMEcm">
+                <entry key="version">v11</entry>
+                <entry key="path">getValue(PATHS|defaultDbPath)/5_Protein_Domain/Rfam.cm</entry>
+                <entry key="availableFormats">
+                    <entry>Infernal</entry>
+                </entry>
+            </entry> 			
+
+           <!-- Wheat Genome Annotation -->
+			<entry key="TAEpepnrgR">
+				<entry key="version">v3</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/10_Unknown/Transcriptome_datasets_Turartu_Tturgidum_GrainGenes/Supplemental_File9_tt-proteins.fasta</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="TAEpepnrgC">
+				<entry key="version">v3</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/10_Unknown/Transcriptome_datasets_Turartu_Tturgidum_GrainGenes/Supplemental_File8_tu-proteins.fasta</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+
+           <!-- Previous wheat genome annotation -->
+			<entry key="TAEcdsmips">
+				<entry key="version">v2.1</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/3_Nucleic_Databanks/MIPS/ta_IWGSC_MIPSv2.2_LowConf_CDS_2014Jul18.fa</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry>
+			<entry key="TAEpepmips">
+				<entry key="version">v2.1</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/Triticum_aestivum.TGACv1.pep.all.fa</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry>
+
+			<!--entry key="TAEcds3bgdec">
+				<entry key="version">v6</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/TAEcds3bgdec_v6</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+			<!--entry key="TAEpep3bgdec">
+				<entry key="version">v6</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/TAEpep3bgdec_v6</entry>
+				<entry key="availableFormats">
+					<entry>ProteicBlast</entry>
+				</entry>
+			</entry-->
+
+			<!--entry key="TAEcds1BL">
+				<entry key="version">v1.1</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/TAEcds1BL_v1-1</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+			<!--entry key="TAEcds1BS">
+				<entry key="version">v1.1</entry>
+				<entry key="path">getValue(PATHS|defaultDbPath)/TAEcds1BS_v1-1</entry>
+				<entry key="availableFormats">
+					<entry>NucleicBlast</entry>
+				</entry>
+			</entry-->
+		  
+		</entry>
+
+		<!-- Internal or external tools -->
+		<entry key="soft">
+			<!-- You need to add an entry for each tool/program/software that you want to use in TriAnnot -->
+			<!-- If the software is in your PATH, you only need to put the name of the software in the bin entry, otherwise a full path is required -->
+			<!-- The version entry is used to display which software version were used in TriAnnot output files -->
+
+			<!-- Finders -->
+			<entry key="ssrFinder">
+				<entry key="version">2.3.2</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/ssrFinder_2.3.2/bin/ssrFinder.pl</entry>
+			</entry>
+			<entry key="isbpFinder">
+				<entry key="version">4.2</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/isbpFinder_4.2/bin/isbpFinder.pl</entry>
+			</entry>
+
+			<!-- Primer prediction -->
+			<entry key="Primer3">
+				<entry key="version">2.3.6</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/primer3-2.3.7/src/primer3_core</entry>
+			</entry>
+
+			<!-- Repeat / TE / tRNA search and identification -->
+			<entry key="RepeatMasker">
+				<entry key="version">open-4-0-5</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/RepeatMasker/RepeatMasker</entry>
+			</entry>
+			<entry key="TRF">
+				<entry key="version">4.07b</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/trf321.linux.exe</entry>
+			</entry>
+			<entry key="ClariTE">
+				<entry key="version">1.0</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/clariTE_1.0/bin/clariTE.pl</entry>
+			</entry>
+
+			<!-- ncRNA -->
+			<entry key="tRNAscanSE">
+				<entry key="version">1.3</entry>
+				<entry key="bin">/home/706lab/soft/bin/tRNAscan-SE</entry>
+			</entry>
+            				<entry key="Infernal">
+                				<entry key="version">1.1</entry>
+                				<entry key="bin">/work2/706lab/TriAnnot_software/infernal-1.1.2-linux-intel-gcc/src/cmscan</entry> 
+            				</entry>	
+            				<entry key="RNAmmer">
+               					<entry key="version">1.2</entry>
+                				<entry key="bin">/work2/706lab/TriAnnot_software/rnammer-1.2.src/rnammer</entry>
+            				</entry> 			
+
+			<!-- Blast Legacy -->
+			<entry key="Blast">
+				<entry key="version">2.2.26</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/blast-2.2.26/bin/blastall</entry>
+			</entry>
+			<entry key="formatdb">
+				<entry key="version">2.2.26</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/blast-2.2.26/bin/formatdb</entry>
+			</entry>
+			<entry key="BestHit">
+				<entry key="version">2.2.26</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/blast-2.2.26/bin/blastall</entry>
+			</entry>
+
+			<!-- Blast+ Warning version 2.2.30 available on CRRI-->
+			<entry key="BlastN">
+				<entry key="version">2.2.30</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/ncbi-blast-2.3.0+/bin/blastn</entry>
+			</entry>
+			<entry key="BlastP">
+				<entry key="version">2.2.30</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/ncbi-blast-2.3.0+/bin/blastp</entry>
+			</entry>
+			<entry key="BlastX">
+				<entry key="version">2.2.30</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/ncbi-blast-2.3.0+/bin/blastx</entry>
+			</entry>
+			<entry key="tBlastN">
+				<entry key="version">2.2.30</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/ncbi-blast-2.3.0+/bin/tblastn</entry>
+			</entry>
+			<entry key="tBlastX">
+				<entry key="version">2.2.30</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/ncbi-blast-2.3.0+/bin/tblastx</entry>
+			</entry>
+			<entry key="makeblastdb">
+				<entry key="version">2.2.30</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/ncbi-blast-2.5.0+/bin/makeblastdb</entry>
+			</entry>
+
+			<!-- Gene modelling -->
+			<entry key="Augustus">
+				<entry key="version">2.7</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/augustus-3.2.2/bin/augustus</entry>
+			</entry>
+			<entry key="GeneID">
+				<entry key="version">1.4.4</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/geneid/bin/geneid</entry>
+			</entry>
+			<!--entry key="FgeneSH">
+				<entry key="version">7.1.1</entry>
+				<entry key="bin">/home/banks3b/triannot_Tools/FGENESH/fgenesh_suite_v7.1.1/fgenesh</entry>
+				<entry key="version">3.1.2</entry>
+				<entry key="bin">/share/apps/bin/fgenesh</entry>
+				
+			</entry-->
+
+			<entry key="Eugene">
+				<entry key="version">4.0</entry>
+				<entry key="bin">/home/706lab/soft/bin</entry>
+			</entry>
+
+			<!--entry key="GeneMarkHMM2">
+				<entry key="version">2.2a(MTX)</entry>
+				<entry key="bin">/mnt/hgfs/E/TriAnnot_software/genemark_hmm_euk_linux_64/ehmm/gmhmme2</entry>
+			</entry-->
+			<entry key="GeneMarkHMM3">
+				<entry key="version">3.9d(MOD)</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/genemark_hmm_euk_linux_64/ehmm/gmhmme3</entry>
+				
+			</entry>
+
+			<entry key="Exonerate">
+				<entry key="version">2.2.0</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/exonerate-2.2.0-x86_64/bin/exonerate</entry>
+			</entry>
+
+			<!-- ORF prediction -->
+			<entry key="getORF">
+				<entry key="version">EMBOSS6.6.0</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/EMBOSS-6.6.0/bin/getorf</entry>
+			</entry>
+
+			<!-- Interpro -->
+			<entry key="HMMpfam">
+				<entry key="version">2.3.2</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/hmmer-2.3.2/src/hmmpfam</entry>
+			</entry>
+			<entry key="HMMscan">
+				<entry key="version">3.1b2</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/hmmer-3.1b2-linux-intel-x86_64/binaries/hmmscan</entry>
+			</entry>
+			<entry key="InterProScan5">
+				<entry key="version">5.13-52.0</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/interproscan-5.21-60.0/interproscan.sh</entry>
+			</entry>
+
+			<!-- K-mer counting/indexing -->
+			<entry key="GTtallymer">
+				<entry key="version">GenomeTools1.5.5</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/genometools-1.5.7/bin/gt</entry>
+			</entry>
+
+			<!-- Utilities -->
+			<entry key="fastacmd">
+				<entry key="version">2.2.26</entry>
+				<entry key="bin">/work2/706lab/TriAnnot_software/blast-2.2.26/bin//fastacmd</entry>
+			</entry>
+
+			<!-- TriAnnot core programs -->
+			<entry key="TriAnnotPipeline">
+				<entry key="version">5.2p02</entry>
+				<entry key="bin">getTriAnnotBinPath()/TriAnnotPipeline.py</entry>
+			</entry>
+
+			<entry key="TriAnnotUnit">
+				<entry key="version">5.2p02</entry>
+				<entry key="bin">getTriAnnotBinPath()/TriAnnotUnit.py</entry>
+			</entry>
+
+			<entry key="Program_Launcher">
+				<entry key="version">5.2p02</entry>
+				<entry key="bin">getTriAnnotBinPath()/TAP_Program_Launcher.pl</entry>
+			</entry>
+			<entry key="Parser_Launcher">
+				<entry key="version">5.2p02</entry>
+				<entry key="bin">getTriAnnotBinPath()/TAP_Parser_Launcher.pl</entry>
+			</entry>
+
+			<entry key="CheckConfiguration">
+				<entry key="version">5.2p02</entry>
+				<entry key="bin">getTriAnnotBinPath()/CheckConfiguration.py</entry>
+			</entry>
+
+			<!-- SIMsearch scripts -->
+			<entry key="SIMsearch">
+				<entry key="version">2015-04</entry>
+				<entry key="bin">getTriAnnotBinPath()/SIMsearch/SIMsearch.pl</entry>
+			</entry>
+			<entry key="map">
+				<entry key="version">2014-08</entry>
+				<entry key="bin">getTriAnnotBinPath()/SIMsearch/bl2fna_exonerate.pl</entry>
+			</entry>
+			<entry key="orf">
+				<entry key="version">2014-08</entry>
+				<entry key="bin">getTriAnnotBinPath()/SIMsearch/fna2orf.pl</entry>
+			</entry>
+			<entry key="ext">
+				<entry key="version">2014-08</entry>
+				<entry key="bin">getTriAnnotBinPath()/SIMsearch/Extended_gff_start_stop.pl</entry>
+			</entry>
+			<entry key="eij">
+				<entry key="version">2014-08</entry>
+				<entry key="bin">getTriAnnotBinPath()/SIMsearch/compEIjunction.pl</entry>
+			</entry>
+			<entry key="modo">
+				<entry key="version">2014-08</entry>
+				<entry key="bin">getTriAnnotBinPath()/SIMsearch/modifyORF.pl</entry>
+			</entry>
+			<entry key="modg">
+				<entry key="version">2014-08</entry>
+				<entry key="bin">getTriAnnotBinPath()/SIMsearch/modifyGFF.pl</entry>
+			</entry>
+
+		</entry>
+
+		<!-- Matrices -->
+		<entry key="matrices" description="Ab initio prediction matrices">
+			<!-- Suggested entries -->
+			<!-- Uncomment this section and edit the matrices paths (and names) as needed for each matrix that you want to use with TriAnnot -->
+			<!-- The path entry must be a full path to the matrix file -->
+
+			<entry key="Augustus">
+				<entry key="wheat">
+					<entry key="type">directory</entry>
+					<entry key="path">/work2/706lab/TriAnnot_software/augustus-3.2.2/config/species/wheat</entry>
+				</entry>
+				<entry key="maize5">
+					<entry key="type">directory</entry>
+					<entry key="path">/work2/706lab/TriAnnot_software/augustus-3.2.2/config/species/maize5</entry>
+				</entry>
+			</entry>
+			<entry key="GeneMarkHMM">
+				<entry key="barley">
+					<entry key="type">file</entry>
+					<entry key="path">/work2/706lab/TriAnnot_software/genemark_hmm_euk_linux_64/ehmm/barley.mtx</entry>
+				</entry>
+				<entry key="maize">
+					<entry key="type">file</entry>
+					<entry key="path">/work2/706lab/TriAnnot_software/genemark_hmm_euk_linux_64/ehmm/corn.mtx</entry>
+				</entry>
+				<entry key="rice">
+					<entry key="type">file</entry>
+					<entry key="path">/work2/706lab/TriAnnot_software/genemark_hmm_euk_linux_64/ehmm/o_sativa.mod</entry>
+				</entry>
+				<entry key="wheat">
+					<entry key="type">file</entry>
+					<entry key="path">/work2/706lab/TriAnnot_software/genemark_hmm_euk_linux_64/ehmm/wheat.mtx</entry>
+				</entry>
+				<!--entry key="wheat3">
+					<entry key="type">file</entry>
+					<entry key="path">/work2/706lab/TriAnnot_software/genemark_hmm_euk_linux_64/ehmm/wheat.mod</entry>
+				</entry-->
+			</entry>
+			<entry key="GeneID">
+				<entry key="wheat">
+					<entry key="type">file</entry>
+					<entry key="path">/work2/706lab/TriAnnot_software/geneid/param/wheat.param</entry>
+				</entry>
+			</entry>
+			<!--entry key="FgeneSH">
+				<entry key="Monocots">
+					<entry key="type">file</entry>
+					<entry key="path">/share/apps/share/fgenesh/Monocots</entry>
+				</entry>
+				<entry key="Dicots">
+					<entry key="type">file</entry>
+					<entry key="path">/share/apps/share/fgenesh/Dicots</entry>
+				</entry>
+				<entry key="Wheat">
+					<entry key="type">file</entry>
+					<entry key="path">/home/banks3b/triannot_Tools/FGENESH/fgenesh_suite_v7.1.1/Triticum_aestivum.mpar.dat</entry>
+				</entry>
+			</entry-->
+			<!--entry key="Eugene">
+				<entry key="wheat">
+					<entry key="type">file</entry>
+					<entry key="path">/home/banks3b/matrices/Eugene/wheat_beta.mat</entry>
+				</entry>
+				<entry key="poplar">
+					<entry key="type">file</entry>
+					<entry key="path">/home/banks3b/matrices/Eugene/poplar.mat</entry>
+				</entry>
+				<entry key="vitis">
+					<entry key="type">file</entry>
+					<entry key="path">/home/banks3b/matrices/Eugene/vitis.mat</entry>
+				</entry>
+			</entry-->
+		</entry>
+
+		<!-- Configuration files/directories -->
+		<entry key="config">
+			<entry key="Eugene">
+				<entry key="type">directory</entry>
+				<entry key="path">/work2/706lab/TriAnnot_software/eugene-4.2/config</entry>
+			</entry>
+			<entry key="Augustus">
+				<entry key="type">directory</entry>
+				<entry key="path">/work2/706lab/TriAnnot_software/augustus-3.2.2/config</entry>
+			</entry>
+		</entry>
+
+		<!-- Tallymer indexes -->
+		<entry key="index">
+			<!-- Sample entries -->
+			<!--entry key="GTtallymer">
+				<entry key="Cs1XOCC1">
+					<entry key="creationDate">2009</entry>
+					<entry key="path">/home/banks3b/Tallymer_Index/CS1xBbsrcDec2009/CS1x_20mer_occ1</entry>
+				</entry>
+			</entry-->
+		</entry>
+	</section>
+</triannotConf>

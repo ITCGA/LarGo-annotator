@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="ClariTE">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|ClariTE|bin</entry>
+		</entry>
+
+		<entry key="commonParameters">
+			<entry key="database">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|db</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="listOfValuesFilter">
+					<entry key="filterPath">availableFormats</entry>
+					<entry key="filterMode">values</entry>
+					<entry key="filterAllowedValues">
+						<entry>ClariTE</entry>
+					</entry>
+				</entry>
+			</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<entry key="RepeatMaskerXmFile" description="Name of an existing (already generated) RepeatMasker result file (XM format)">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">string</entry>
+			</entry>
+
+			<entry key="useGeneModelData" description="Define if the gene structure described in the geneModelEmblFile must be used to help ClariTE during the TE annotation procedure">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry> <!-- ClariTE -gene option WILL be used -->
+				<entry key="falseValue">no</entry> <!-- ClariTE -gene option WILL NOT be used -->
+			</entry>
+
+			<entry key="geneModelEmblFile" description="EMBL file containing gene structure predictions that will help ClariTE during the TE annotation procedure (ClariTE -gene option)">
+				<entry key="type">string</entry>
+			</entry>
+
+			<entry key="outFile">
+				<entry key="defaultValue">CLARITE_{database}.out</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<!-- Custom feature source -->
+			<entry key="sourceTag" description="Source Tag to use during features creation">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">CLARITE_{database}</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_CLARITE_{database}.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_CLARITE_{database}.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|repeat</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">repeatRegionAndJoinedRepeatFragment</entry>
+			</entry>
+
+			<entry key="EMBLRename.repeat_region">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+			<entry key="EMBLRename.nested_repeat">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+			<entry key="EMBLRename.repeat_fragment">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="reconstructionParameters">
+			<entry key="activateReconstruction" description="Activate or desactivate the global result files reconstruction for splitted sequences">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+		</entry>
+
+	</section>
+</triannotConf>

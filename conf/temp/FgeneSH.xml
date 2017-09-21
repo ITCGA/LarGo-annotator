@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="FgeneSH">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|FgeneSH|bin</entry>
+		</entry>
+
+		<entry key="commonParameters">
+			<entry key="matrix" description="Name of the matrix to use for FGeneSH">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|matrices|FgeneSH</entry>
+				<entry key="listOfValuesMode">keys</entry>
+			</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<entry key="outFile" description="Name to use for the FGeneSH out file">
+				<entry key="defaultValue">{step}_FGENESH.out</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<!-- Custom feature source -->
+			<entry key="sourceTag" description="Source Tag to use during features creation">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">FGENESH</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_FGENESH.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_FGENESH.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|gene</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">joinedCDSOnly</entry>
+			</entry>
+
+			<entry key="EMBLRename.CDS">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">FGeneSH</entry>
+			</entry>
+			<entry key="EMBLRename.polypeptide">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">FGeneSH</entry>
+			</entry>
+		</entry>
+
+	</section>
+</triannotConf>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="AminoNames">
+		<entry key="Ala">Alanine</entry>
+		<entry key="Arg">Arginine</entry>
+		<entry key="Asn">Asparagine</entry>
+		<entry key="Asp">Aspartate</entry>
+		<entry key="Cys">Cysteine</entry>
+		<entry key="Glu">Glutamate</entry>
+		<entry key="Gln">Glutamine</entry>
+		<entry key="Gly">Glycine</entry>
+		<entry key="His">Histidine</entry>
+		<entry key="Ile">Isoleucine</entry>
+		<entry key="Leu">Leucine</entry>
+		<entry key="Lys">Lysine</entry>
+		<entry key="Met">Methionine</entry>
+		<entry key="Phe">Phenylalanine</entry>
+		<entry key="Pro">Proline</entry>
+		<entry key="Pyl">Pyrrolysine</entry>
+		<entry key="Sec">Selenocysteine</entry>
+		<entry key="Ser">Serine</entry>
+		<entry key="Thr">Threonine</entry>
+		<entry key="Trp">Tryptophan</entry>
+		<entry key="Tyr">Tyrosine</entry>
+		<entry key="Val">Valine</entry>
+		<entry key="Undet">Unknown amino acid</entry>
+	</section>
+</triannotConf>

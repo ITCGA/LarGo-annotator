@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="Runners">
+
+		<!-- Important Notes:
+			- A task is one step of a pipeline (Ex: RepeatMasker)
+			- For each task, up to two jobs (Execution and Parsing) will be submitted
+		-->
+
+		<!-- Local Runner -->
+		<entry key="Local" description="Local execution - All jobs will be executed as a simple process on the local machine">
+			<!-- Usage limitation -->
+			<entry key="usageLimitation" description="Define if the current runner can be used to submit TriAnnotUnit instances, TriAnnot tasks or both. Possible values are: instance, task, both.">both</entry>
+
+			<!-- Multithreading -->
+			<entry key="defaultNumberOfThread" description="Default number of thread to use for multithread capable tools (use 1 to disable multithread)">1</entry>
+			<entry key="maximumNumberOfThreadByTool" description="Maximum number of thread that can be used by a given multithread capable tool">4</entry>
+			<entry key="totalNumberOfThread" description="Maximum total number of thread allowed at a given moment for all running jobs">120</entry>
+
+			<!-- Submission -->
+			<entry key="maximumFailedSubmission" description="Maximum number of failed submission attempt for a given job">3</entry>
+
+			<!-- Monitoring -->
+			<entry key="monitoringCommandPattern" description="Pattern of the monitoring command to use">ps -p {jobid}</entry>
+			<entry key="monitoringInterval" description="Number of seconds to wait between each job status check">30</entry>
+
+			<entry key="maximumFailedMonitoring" description="Maximum number of failed monitoring attempt for a given job">3</entry>
+
+			<!-- Task/job killing -->
+			<entry key="killCommandPattern" description="Pattern of the kill command to use">kill -9 {jobid}</entry>
+		</entry>
+
+
+
+		<!-- SGE Runner -->
+		<entry key="SunGridEngine" description="Batch execution with SGE - All jobs (that does not submit other job(s)) will be executed on a computing element registered in and accessible by SGE">
+			<!-- Usage limitation -->
+			<entry key="usageLimitation" description="Define if the current runner can be used to submit TriAnnotUnit instances, TriAnnot tasks or both. Possible values are: instance, task, both.">both</entry>
+
+			<!-- Computing slots -->
+			<entry key="defaultNumberOfThread" description="Default number of SGE slots to require for multithread capable tools (1 Thread = 1 Slot)">1</entry>
+			<entry key="maximumNumberOfThreadByTool" description="Maximum number of SGE slots that can be required by a given multithread capable tool">8</entry> <!-- Warning: Must not be greater than the size of a node if SGE allocation rule is set to "pe_slots" -->
+
+			<!-- Submission -->
+			<entry key="submitCommandPattern" description="Pattern of the submit command to use">qsub -V -cwd -q {defaultQueueName}</entry>
+
+			<entry key="defaultQueueName" description="Name of the default SGE queue (Option -q)">all.q</entry>
+			<entry key="parallelEnvironmentName" description="Name of the parallel environment to use for multithread capable tools (Option -pe)">multithread</entry> <!-- Do not use this key in the submission command pattern, TriAnnot manages multithreading internally -->
+			<entry key="requestedRessources" description="Custom ressources requirements (Option -l)"> <!-- Do not use this key in the submission command pattern, TriAnnot manages requested ressources internally -->
+				<!-- Valid syntax: a key=value couple on each line -->
+				<!-- Example: -->
+				<entry>mem_free=1G</entry>
+			</entry>
+
+			<entry key="maximumFailedSubmission" description="Maximum number of failed submission attempt for a given job">3</entry>
+
+			<!-- Warning: when the following parameter is set to no, some TriAnnot tools (FuncAnnot, Interproscan, etc) will submit their main job with the fallback runner (that should be set to "Local" in TriAnnotConfig XML file) -->
+			<entry key="allowSubmissionFromComputeNodes" description="Define if a batch job can submit other batch jobs or not (Qsub of Qsub)">no</entry>
+
+			<!-- Monitoring -->
+			<entry key="monitoringCommandPattern" description="Pattern of the monitoring command to use">qstat -j {jobid}</entry>
+			<entry key="monitoringInterval" description="Number of seconds to wait between each job status check">45</entry>
+
+			<entry key="maximumFailedMonitoring" description="Maximum number of failed monitoring attempt for a given job">3</entry>
+
+			<!-- Task/job killing -->
+			<entry key="killCommandPattern" description="Pattern of the kill command to use">qdel {jobid}</entry>
+		</entry>
+
+
+
+		<!-- Torque/PBS Runner -->
+		<entry key="Torque" description="Batch execution with Torque/PBS - All jobs (that does not submit other job(s)) will be executed on a computing element registered in and accessible by Torque/PBS">
+			<!-- Usage limitation -->
+			<entry key="usageLimitation" description="Define if the current runner can be used to submit TriAnnotUnit instances, TriAnnot tasks or both. Possible values are: instance, task, both.">both</entry>
+
+			<!-- Computing slots -->
+			<entry key="defaultNumberOfThread" description="Default number of Torque slots to require for multithread capable tools (1 Thread = 1 Slot)">1</entry>
+			<entry key="maximumNumberOfThreadByTool" description="Maximum number of Torque slots that can be required by a given multithread capable tool">8</entry>
+			<entry key="clusterNodeSize" description="Number of slot by computing nodes">8</entry>
+
+			<!-- Number of core to use for multithread capable tools is managed internally, do not add it to requestedRessources -->
+			<!-- Note: The real number of slot used for a given multithread job will depends on the slotRequestType and the clusterNodeSize -->
+			<!-- If the user ask for 10 thread and the cluster node size is set to 4 then:
+				- with "procs": -l procs=10 => 10 slots
+				- with "ppn": -l nodes=3,ppn=3 => 9 slots (Number of node is rounded up, number of processor per node is rounded down)
+			-->
+			<entry key="slotRequestType" description="Type of slot request for multithread capable tools (procs=X -or- nodes=Y;ppn=Z)">ppn</entry> <!-- Possible values are [procs|ppn] -->
+
+			<!-- Submission -->
+			<entry key="submitCommandPattern" description="Pattern of the submit command to use">qsub -V -q {defaultQueueName}</entry>
+			<entry key="defaultQueueName" description="Name of the default Torque queue (Option -q)">Enter_a_queue_name</entry>
+			<entry key="requestedRessources" description="Custom resources requirements (Option -l)"> <!-- Do not use this key in the submission command pattern, TriAnnot manages requested resources internally -->
+				<!-- Valid syntax: a key=value couple on each line -->
+				<!-- Examples: -->
+				<entry>pmem=1gb</entry>
+				<entry>walltime=48:00:00</entry>
+			</entry>
+
+			<entry key="maximumFailedSubmission" description="Maximum number of failed submission attempt for a given job">3</entry>
+
+			<!-- Warning: when the following parameter is set to no, some TriAnnot tools (FuncAnnot, Interproscan, etc) will submit their main job with the fallback runner (that should be set to "Local" in TriAnnotConfig XML file) -->
+			<entry key="allowSubmissionFromComputeNodes" description="Define if a batch job can submit other batch jobs or not (Qsub of Qsub)">no</entry>
+
+			<!-- Monitoring -->
+			<entry key="monitoringCommandPattern" description="Pattern of the monitoring command to use">qstat -f {jobid}</entry>
+			<entry key="monitoringInterval" description="Number of seconds to wait between each job status check">45</entry>
+
+			<entry key="maximumFailedMonitoring" description="Maximum number of failed monitoring attempt for a given job">3</entry>
+
+			<!-- Task/job killing -->
+			<entry key="killCommandPattern" description="Pattern of the kill command to use">qdel {jobid}</entry>
+		</entry>
+
+
+
+		<!-- SLURM Runner -->
+		<entry key="SLURM" description="Batch execution with SLURM - All jobs (that does not submit other job(s)) will be executed on a computing element registered in and accessible by SLURM">
+			<!-- Usage limitation -->
+			<entry key="usageLimitation" description="Define if the current runner can be used to submit TriAnnotUnit instances, TriAnnot tasks or both. Possible values are: instance, task, both.">both</entry>
+
+			<!-- Computing slots - TriAnnot will use sbatch "cpus-per-task" option to submit tasks that require more than one slot -->
+			<entry key="defaultNumberOfThread" description="Default number of SLURM slots to require for multithread capable tools (1 Thread = 1 Slot)">1</entry>
+			<entry key="maximumNumberOfThreadByTool" description="Maximum number of SLURM slots that can be required by a given multithread capable tool">8</entry> <!-- Warning: Should not be greater than the size of a node -->
+
+			<!-- Submission -->
+			<entry key="submitCommandPattern" description="Pattern of the submit command to use">sbatch --export=ALL -p {defaultQueueName}</entry> <!-- By default SLURM transfer all environment variables and works in the current directory -->
+
+			<entry key="defaultQueueName" description="Name of the default queue/partition (sbatch -p option)">Enter_a_partition_name</entry> <!-- This entry can be used in the submission command pattern with the following syntax: -p {defaultQueueName} -->
+			<entry key="memoryRequirementPerNode" description="Custom memory requirement per node in MB (sbatch --mem  option)">Enter_an_amount_of_memory_if_used_in_submit_pattern</entry> <!-- This entry can be used in the submission command pattern with the following syntax: -\-mem {memoryRequirementPerNode} (Remove the blackslash between the two dash !)-->
+			<entry key="memoryRequirementPerCpu" description="Custom memory requirement per CPU in MB (sbatch --mem-per-cpu option)">Enter_an_amount_of_memory_if_used_in_submit_pattern</entry> <!-- This entry can be used in the submission command pattern with the following syntax: -\-mem-per-cpu {memoryRequirementPerCpu} (Remove the blackslash between the two dash !)-->
+
+			<entry key="maximumFailedSubmission" description="Maximum number of failed submission attempt for a given job">3</entry>
+
+			<!-- Warning: when the following parameter is set to no, some TriAnnot tools (FuncAnnot, Interproscan, etc) will submit their main job with the fallback runner (that should be set to "Local" in TriAnnotConfig XML file) -->
+			<entry key="allowSubmissionFromComputeNodes" description="Define if a batch job can submit other batch jobs or not (Sbatch of Sbatch)">no</entry>
+
+			<!-- Monitoring -->
+			<entry key="monitoringCommandPattern" description="Pattern of the monitoring command to use">squeue -j {jobid}</entry> <!-- Do not use the option to remove the header line -->
+			<entry key="monitoringInterval" description="Number of seconds to wait between each job status check">15</entry>
+
+			<entry key="maximumFailedMonitoring" description="Maximum number of failed monitoring attempt for a given job">3</entry>
+
+			<!-- Task/job killing -->
+			<entry key="killCommandPattern" description="Pattern of the kill command to use">scancel {jobid}</entry>
+		</entry>
+
+
+		<!-- SLURM + ALPS Runner - This runner is made to run TriAnnotUnit instances not the tasks run by TriAnnotUnit itself -->
+		<entry key="ALPS" description="Batch execution with SLURM + ALPS (Application Level Placement Scheduler by Cray) - Special SLURM runner that works with job files that run aprun commands (ALPS)">
+			<!-- Usage limitation -->
+			<entry key="usageLimitation" description="Define if the current runner can be used to submit TriAnnotUnit instances, TriAnnot tasks or both. Possible values are: instance, task, both.">instance</entry>
+
+			<!-- Computing slots -->
+			<!-- Example: On the Magnus cluster the minimal allocation is a full 24 core node by job so at a given time a task can consume up to 24 threads if it is alone on a node -->
+			<entry key="defaultNumberOfThread" description="Default number of SLURM slots to require for multithread capable tools (1 Thread = 1 Slot)">1</entry>
+			<entry key="maximumNumberOfThreadByTool" description="Maximum number of SLURM slots that can be required by a given multithread capable tool">24</entry>
+
+			<!-- Submission -->
+			<!-- When SLURM is used with ALPS then all SLURM directives must be written in the job file instead of directly in the sbatch command -->
+			<!-- As a consequence the submit command pattern should just be "sbatch" (the job file path will be added automatically) -->
+			<entry key="submitCommandPattern" description="Pattern of the submit command to use">sbatch</entry>
+
+			<entry key="slurmJobFileHeader" description="Shebang to use at the top of the job file">Enter_a_shell_shebang</entry> <!-- Example: #!/usr/bin/env bash -->
+			<entry key="slurmAccount" description="#SBATCH -account- instruction">Enter_an_account_name</entry>
+			<entry key="slurmNodeRequirement" description="#SBATCH -nodes- instruction">1</entry> <!-- Warning: This value should not be greater than 1 in the TriAnnot context -->
+			<entry key="slurmPartition" description="#SBATCH -partition- instruction">Enter_a_partition_name</entry>
+
+			<entry key="additionalSbatchInstructions" description="Additional #SBATCH instructions not managed though their own entries"> <!-- Please note that the "job-name", "output" and "error" instructions are automatically generated by TriAnnot at runtime -->
+				<!-- Valid syntax: a key=value couple on each line -->
+				<!-- Example: -->
+				<entry>--time=24:00:00</entry>
+			</entry>
+
+			<entry key="aprunCommandPattern" description="Pattern of the aprun command to use">aprun -n {aprunPes} -d {aprunDepth}</entry> <!-- The program to execute with aprun will be added to the command line automatically -->
+			<entry key="aprunPes" description="aprun -n option ">1</entry>
+			<entry key="aprunDepth" description="aprun -d option ">24</entry>
+
+
+			<entry key="maximumFailedSubmission" description="Maximum number of failed submission attempt for a given job">3</entry>
+
+			<!-- Warning: when the following parameter is set to no, some TriAnnot tools (FuncAnnot, Interproscan, etc) will submit their main job with the fallback runner (that should be set to "Local" in TriAnnotConfig XML file) -->
+			<entry key="allowSubmissionFromComputeNodes" description="Define if a batch job can submit other batch jobs or not (Sbatch of Sbatch)">no</entry> <!-- Should not be set to yes without caution -->
+
+			<!-- Monitoring -->
+			<entry key="monitoringCommandPattern" description="Pattern of the monitoring command to use">squeue -j {jobid}</entry> <!-- Do not use the option to remove the header line -->
+			<entry key="monitoringInterval" description="Number of seconds to wait between each job status check">15</entry>
+
+			<entry key="maximumFailedMonitoring" description="Maximum number of failed monitoring attempt for a given job">3</entry>
+
+			<!-- Task/job killing -->
+			<entry key="killCommandPattern" description="Pattern of the kill command to use">scancel {jobid}</entry>
+		</entry>
+
+	</section>
+</triannotConf>

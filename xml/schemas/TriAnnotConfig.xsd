@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0">
+
+<xs:element name="triannotConf">
+	<xs:complexType>
+		<xs:sequence minOccurs="1" maxOccurs="unbounded">
+			<xs:element name="section">
+				<xs:complexType>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="entry" type="entryType">
+							<xs:unique name="uniqueEntryKey2"> 
+								<xs:selector xpath="./entry"/> 
+								<xs:field xpath="@key"/> 
+							</xs:unique>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="name" type="xs:string" use="required" />
+					<xs:attribute name="description" type="xs:string" />
+					<xs:attribute name="clear" type="xs:string" />
+				</xs:complexType>
+				<xs:unique name="uniqueEntryKey1"> 
+					<xs:selector xpath="./entry"/> 
+					<xs:field xpath="@key"/> 
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="triannot_version" type="xs:string" use="required" />
+		<xs:attribute name="description" type="xs:string" />
+	</xs:complexType>
+
+	<xs:unique name="uniqueSectionName"> 
+		<xs:selector xpath="./section"/> 
+		<xs:field xpath="@name"/> 
+	</xs:unique>
+</xs:element>
+
+	
+<xs:complexType name="entryType" mixed="true">
+	<xs:sequence minOccurs="0" maxOccurs="unbounded">
+		<xs:element name="entry" type="entryType">
+			<xs:unique name="uniqueEntryKey3"> 
+				<xs:selector xpath="./entry"/> 
+				<xs:field xpath="@key"/> 
+			</xs:unique>
+		</xs:element>
+	</xs:sequence>
+	<xs:attribute name="key" type="xs:string" />
+	<xs:attribute name="description" type="xs:string" />
+	<xs:attribute name="clear" type="xs:string" />
+</xs:complexType>
+
+
+</xs:schema>
+ 

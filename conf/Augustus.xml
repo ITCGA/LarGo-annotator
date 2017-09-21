@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="Augustus">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|Augustus|bin</entry>
+			<entry>PATHS|config|Augustus|path</entry>
+		</entry>
+
+		<entry key="commonParameters">
+			<entry key="matrix">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|matrices|Augustus</entry>
+				<entry key="listOfValuesMode">keys</entry>
+			</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<entry key="RNAseqHintsFile">
+				<entry key="defaultValue">Augustus_hints.gff</entry>
+				<entry key="type">string</entry>
+			</entry>
+			<entry key="proteinHintsFile">
+				<entry key="defaultValue">Augustus_hints.gff</entry>
+				<entry key="type">string</entry>
+			</entry>
+			<entry key="extrinsicConfigFile">
+				<entry key="defaultValue">Augustus_extrinsic.cfg</entry>
+				<entry key="type">string</entry>
+			</entry>
+			<entry key="strand" description="Possible values are: both, forward, backward">
+				<entry key="defaultValue">both</entry>
+				<entry key="type">string</entry>
+				<entry key="possibleValues">
+					<entry>both</entry>
+					<entry>forward</entry>
+					<entry>backward</entry>
+				</entry>
+			</entry>
+			<entry key="genemodel_type" description="Possible values are: complete, partial, intronless, atleastone, exactlyone">
+				<entry key="defaultValue">complete</entry>
+				<entry key="type">string</entry>
+				<entry key="possibleValues">
+					<entry>complete</entry>
+					<entry>partial</entry>
+					<entry>intronless</entry>
+					<entry>atleastone</entry>
+					<entry>exactlyone</entry>
+				</entry>
+			</entry>
+			<entry key="singlestrand" description="Possible values are: true, false">
+				<entry key="defaultValue">false</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">true</entry>
+				<entry key="falseValue">false</entry>
+			</entry>
+			<entry key="predict_utr" description="Possible values are: on, off">
+				<entry key="defaultValue">on</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">on</entry>
+				<entry key="falseValue">off</entry>
+			</entry>
+			<entry key="output_protein" description="Possible values are: on, off">
+				<entry key="defaultValue">off</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">on</entry>
+				<entry key="falseValue">off</entry>
+			</entry>
+			<entry key="output_introns" description="Possible values are: on, off">
+				<entry key="defaultValue">off</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">on</entry>
+				<entry key="falseValue">off</entry>
+			</entry>
+			<entry key="output_start" description="Possible values are: on, off">
+				<entry key="defaultValue">off</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">on</entry>
+				<entry key="falseValue">off</entry>
+			</entry>
+			<entry key="output_stop" description="Possible values are: on, off">
+				<entry key="defaultValue">off</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">on</entry>
+				<entry key="falseValue">off</entry>
+			</entry>
+			<entry key="output_cds" description="Possible values are: on, off">
+				<entry key="defaultValue">on</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">on</entry>
+				<entry key="falseValue">off</entry>
+			</entry>
+			<entry key="output_codingseq">
+				<entry key="defaultValue">off</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">on</entry>
+				<entry key="falseValue">off</entry>
+			</entry>
+			<entry key="use_hints">
+				<entry key="defaultValue">off</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">on</entry>
+				<entry key="falseValue">off</entry>
+			</entry>
+			<entry key="outFile">
+				<entry key="defaultValue">{step}_AUGUSTUS_{matrix}.out</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<!-- Custom feature source -->
+			<entry key="sourceTag" description="Source Tag to use during features creation">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">AUGUSTUS_{matrix}</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_AUGUSTUS_{matrix}.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_AUGUSTUS_{matrix}.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|gene</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">joinedCDSOnly</entry>
+			</entry>
+
+			<entry key="EMBLRename.CDS">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">AUGUSTUS_{matrix}</entry>
+			</entry>
+			<entry key="EMBLRename.polypeptide">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">AUGUSTUS_{matrix}</entry>
+			</entry>
+		</entry>
+
+		<entry key="reconstructionParameters">
+			<entry key="activateReconstruction" description="Activate or desactivate the global result files reconstruction for splitted sequences">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+		</entry>
+
+		<entry key="Rejected_feature_types">
+			<entry>transcription_start_site</entry>
+			<entry>transcription_end_site</entry>
+			<entry>start_codon</entry>
+			<entry>stop_codon</entry>
+		</entry>
+
+	</section>
+</triannotConf>

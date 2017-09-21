@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="5.2.p02">
+	<section name="Global" description="Global settings for TriAnnot pipeline">
+
+		<entry key="CDS_or_POLY" description="Central dogma name for CDS">polypeptide</entry> <!-- Currently broken in some modules, do not change this value -->
+
+		<entry key="Main_feature_type" description="Type of the feature of the first GFF line of each TriAnnot GFF">region</entry>
+		<entry key="Min_non_mask" description="Minimal number of non masked successive bases in a masked file to continue TAP analysis">500</entry>
+		<entry key="Max_percent_mask" description="Maximum percentage of masked bases in a masked sequence to continue TAP analysis">100</entry>
+
+		<entry key="DefaultInstanceJobRunner" description="Name of the job runner to use to execute TriAnnotInstance.py for each sequence to analyse (Possible values are entries of the TriAnnotConfig_Runners XML file)">Local</entry>
+
+		<entry key="DefaultTaskJobRunner" description="Name of the job runner to use to submit the execution/parsing jobs of each task of a given instance (Possible values are entries of the TriAnnotConfig_Runners XML file)">Local</entry>
+
+		<entry key="FallbackJobRunner" description="Alternative runner to use when the default job runner can't be used (or is not allowed) for a given task">Local</entry> <!-- Local runner seems to be the perfect candidate here -->
+
+		<entry key="minNucleicSequenceLength" description="Nucleic sequences shorter than this number will not be analysed">2000</entry>
+		<entry key="maxNucleicSequenceLength" description="Nucleic sequences longer than this number will not be analysed (unless sequence splitting is activated)">1000000</entry>
+
+		<entry key="minProteicSequenceLength" description="Nucleic sequences shorter than this number will not be analysed">10</entry>
+		<entry key="maxProteicSequenceLength" description="Nucleic sequences longer than this number will not be analysed">10000</entry>
+
+		<entry key="chunkOverlappingSize" description="Size of the overlapping region between two standard chunks (can't be greater than half the size of the maximum sequence length)">50000</entry>
+		<entry key="maxParallelAnalysis" description="Maximum number of sequence analysis (ie. execution of TriAnnotInstance.py) that will be run simultaneously">1</entry>
+
+		<entry key="cleanAtTheEnd" description="set to 'yes' to clean-up intermediate files at the end, or 'no' to keep the files">
+			<entry key="dbJobs">yes</entry>
+			<entry key="launcherFiles">no</entry>
+			<entry key="stdoutFiles">no</entry>
+			<entry key="stderrFiles">no</entry>
+			<entry key="tmpFolders">no</entry>
+			<entry key="commonFilesFolder">no</entry>
+			<entry key="summaryFilesFolder">no</entry>
+			<entry key="logFilesFolder">no</entry>
+			<entry key="doNotCleanFilesOnFailure">yes</entry>
+		</entry>
+
+		<entry key="askUserDecisionOnKeyboardInterrupt" description="Define whether TriAnnot Pipeline needs to ask the user what to do when a KeyboardInterrupt exception is raised. Possible values are: yes|no">no</entry>
+		<entry key="defaultDecisionOnKeyboardInterrupt" description="Define if TriAnnot Pipeline must abort all instances or exit softly when a KeyboardInterrupt exception is raised. Possible values are: exit|abort">abort</entry>
+
+		<entry key="askUserDecisionAboutUnmonitorableInstance" description="Define whether TriAnnot Pipeline needs to ask the user what to do when an un-monitorable instance is detected. Possible values are: yes|no">no</entry>
+		<entry key="defaultDecisionAboutUnmonitorableInstance" description="Define if TriAnnot Pipeline must kill the problematic instance automatically (and stop itself afterward) or if it have to stop itself directly and let the user stop the instance manually when an un-monitorable instance is detected. Possible values are: exit|kill">kill</entry>
+
+
+	</section>
+
+<!--
+	<section name="email">
+		<entry key="smtp"></entry>
+		<entry key="from"></entry>
+		<entry key="errorsRecipient"></entry>
+	</section>
+-->
+
+	<section name="DIRNAME" description="Name of folders used by TriAnnot">
+		<entry key="tmp_files">Commons</entry>
+		<entry key="log_files">Logs</entry>
+		<entry key="summary_files">Abstracts</entry>
+		<entry key="sequence_files">Sequences</entry>
+		<entry key="GFF_files">GFF</entry>
+		<entry key="EMBL_files">EMBL</entry>
+		<entry key="blast_files">Blast_results</entry>
+		<entry key="keep_files">Other_files</entry>
+		<entry key="launcher_files">Launchers</entry>
+	</section>
+
+	<section name="SubFeaturesOrder" description="Define in which order subfeatures should be written in result files. Be careful: do not add 'mRNA' feature type to this table (it's a parent type) - Also used in GMAP">
+		<entry>intron</entry>
+		<entry>exon</entry>
+		<entry>CDS</entry>
+		<entry>polypeptide</entry>
+	</section>
+
+</triannotConf>

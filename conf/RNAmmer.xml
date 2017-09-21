@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="RNAmmer">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|RNAmmer|bin</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<entry key="superKingdom" description="Super kingdom of the input sequence (RNAmmer -S option)">
+				<entry key="type">string</entry>
+				<entry key="defaultValue">euk</entry>
+				<entry key="possibleValues">
+					<entry>arc</entry> <!-- Archaea -->
+					<entry>bac</entry> <!-- Bacteria -->
+					<entry>euk</entry> <!-- Eukarya -->
+				</entry>
+			</entry>
+
+			<entry key="moleculeType" description="Molecule type to search for (RNAmmer -m option)">
+				<entry key="type">string</entry>
+				<entry key="isArray">yes</entry>
+				<entry key="defaultValue">
+					<entry>tsu</entry> <!-- 5/8s rRNA -->
+					<entry>ssu</entry> <!-- 16/18s rRNA -->
+					<entry>lsu</entry> <!-- 23/28s rRNA -->
+				</entry>
+				<entry key="possibleValues">
+					<entry>tsu</entry>
+					<entry>ssu</entry>
+					<entry>lsu</entry>
+				</entry>
+			</entry>
+
+			<entry key="outFile">
+				<entry key="defaultValue">{step}_RNAMMER.out</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<!-- Custom feature source -->
+			<entry key="sourceTag" description="Source Tag to use during features creation">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">RNAMMER</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_RNAMMER.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_RNAMMER.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|rna</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">keepAllFeatures</entry>
+			</entry>
+
+			<entry key="EMBLRename.rRNA">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="reconstructionParameters">
+			<entry key="activateReconstruction" description="Activate or desactivate the global result files reconstruction for splitted sequences">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+		</entry>
+
+	</section>
+</triannotConf>

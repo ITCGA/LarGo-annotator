@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="isbpFinder">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|isbpFinder|bin</entry>
+			<entry>PATHS|soft|Primer3|bin</entry>
+		</entry>
+
+		<entry key="commonParameters">
+			<entry key="database">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|db</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="listOfValuesFilter">
+					<entry key="filterPath">availableFormats</entry>
+					<entry key="filterMode">values</entry>
+					<entry key="filterAllowedValues">
+						<entry>Fasta</entry>
+					</entry>
+				</entry>
+			</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<entry key="RepeatMasker_output_file" description="Name of an existing (already generated) RepeatMasker result file (standard format (Not XM))">
+				<entry key="type">string</entry>
+			</entry>
+
+			<entry key="extremityAreaLength" description="If a RepeatMasker hit starts/ends in the X first/last base of the complete TE present in the database then it will gain a special tag"> <!-- set X -->
+				<entry key="defaultValue">10</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">10</entry>
+			</entry>
+
+			<entry key="minPrimerProductSize" description="Minimum primer product size"> <!-- Minimum Amplicon length -->
+				<entry key="defaultValue">80</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">50</entry>
+			</entry>
+
+			<entry key="maxPrimerProductSize" description="Maximum primer product size"> <!-- Maximum Amplicon length -->
+				<entry key="defaultValue">300</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">100</entry>
+				<entry key="maxValue">3000</entry>
+			</entry>
+
+			<entry key="numberOfPrediction" description="Number of Primer pair (forward/reverse) that Primer3 must predict">
+				<entry key="defaultValue">1</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">1</entry>
+			</entry>
+
+			<entry key="confidenceFilterLevels" description="Filter ISBPs based on the confidence level. Possible subentries are [high|medium|low]"> <!-- filter_by_confidence/fc parameter -->
+				<entry key="type">string</entry>
+				<entry key="isArray">yes</entry>
+				<entry key="defaultValue">
+					<entry>high</entry>
+					<entry>medium</entry>
+				</entry>
+			</entry>
+
+			<entry key="junctionFilterList" description="Filter ISBPs based on their junction types"> <!-- filter_by_jonction_type/fj parameter -->
+				<entry key="type">string</entry>
+				<entry key="isArray">yes</entry>
+			</entry>
+
+			<entry key="descriptionFilterSwitch" description="Reject ISBPs based on the description of the TE predicted on each side of the junction. Possible values are [y|n|yes|no|true|false]"> <!-- reject_uncomplete/ruc parameter -->
+				<entry key="defaultValue">no</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+
+			<entry key="identicalFilterSwitch" description="Reject ISBPs when two identical TEs are predicted on each side of the junction. Possible values are [y|n|yes|no|true|false]"> <!-- reject_identical/ri parameter -->
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+
+			<entry key="unknownFilterSwitch" description="Reject ISBPs when one or both TE comes from an 'Unknown' superfamily. Possible values are [y|n|yes|no|true|false]"> <!-- reject_unknown/ru parameter -->
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+
+			<entry key="outFile" description="Name of the ssrFinder main output file">
+				<entry key="defaultValue">isbpFinder_result_file.gff</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+
+			<entry key="configFile" description="Name of the ssrFinder custom configuration file">
+				<entry key="defaultValue">Custom_config_file.xml</entry>
+				<entry key="type">string</entry>
+			</entry>
+
+			<entry key="executionDirectory" description="Name of ssrFinder execution directory">
+				<entry key="defaultValue">isbpFinder_execution_folder</entry>
+				<entry key="type">string</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<!-- Custom feature source -->
+			<entry key="sourceTag" description="Source Tag to use during features creation">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">ISBPFINDER_{database}</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_ISBPFINDER_{database}.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_ISBPFINDER_{database}.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|marker</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">keepAllFeatures</entry>
+			</entry>
+
+			<entry key="EMBLRename.Amplicon">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="reconstructionParameters">
+			<entry key="activateReconstruction" description="Activate or desactivate the global result files reconstruction for splitted sequences">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+		</entry>
+
+		<entry key="Transposable_elements">
+			<entry key="TE_classification" description="Transposable element classification">
+				<!-- When one of the following 3 letter tag is found in the identifier of a TE, its short description will be set to the corresponding value -->
+				<!-- For example, the identifier "RLC_43349" will return "LTR_Copia" -->
+				<entry key="RLC">LTR_Copia</entry>
+				<entry key="RLG">LTR_Gypsy</entry>
+				<entry key="RLB">LTR_Bel-Pao</entry>
+				<entry key="RLR">LTR_Retrovirus</entry>
+				<entry key="RLE">LTR_ERV</entry>
+				<entry key="RLX">LTR</entry>
+				<entry key="RYD">DIRS_DIRS</entry>
+				<entry key="RYN">DIRS_Ngaro</entry>
+				<entry key="RYV">DIRS_VIPER</entry>
+				<entry key="RYX">DIRS</entry>
+				<entry key="RPP">PLE_Penelope</entry>
+				<entry key="RIR">LINE_R2</entry>
+				<entry key="RIT">LINE_RTE</entry>
+				<entry key="RIJ">LINE_Jockey</entry>
+				<entry key="RIL">LINE_L1</entry>
+				<entry key="RII">LINE_I</entry>
+				<entry key="RIX">LINE</entry>
+				<entry key="RST">SINE_tRNA</entry>
+				<entry key="RSL">SINE_7SL</entry>
+				<entry key="RSS">SINE_5S</entry>
+				<entry key="RSX">SINE</entry>
+				<entry key="RXX">Class_I</entry>
+				<entry key="DTT">TIR_Tc1-Mariner</entry>
+				<entry key="DTA">TIR_hAT</entry>
+				<entry key="DTM">TIR_Mutator</entry>
+				<entry key="DTE">TIR_Merlin</entry>
+				<entry key="DTR">TIR_Transib</entry>
+				<entry key="DTP">TIR_P</entry>
+				<entry key="DTB">TIR_PiggyBac</entry>
+				<entry key="DTH">TIR_Harbinger</entry>
+				<entry key="DTC">TIR_CACTA</entry>
+				<entry key="DTX">TIR</entry>
+				<entry key="DYC">Crypton</entry>
+				<entry key="DHH">Helitron</entry>
+				<entry key="DMM">Maverick</entry>
+				<entry key="DXX">Class_II</entry>
+			</entry>
+
+			<entry key="Keywords_Order">
+				<!-- Define the order in which keywords categories will be run through -->
+				<entry>superfamilies</entry>
+				<entry>orders</entry>
+				<entry>groups</entry>
+			</entry>
+
+			<entry key="TE_keywords">
+				<!-- Only used when the TE identifier does not contains a valid 3 letter tag -->
+				<!-- When one of the following key(word) is found in the full description of a TE, its short description will be set to the corresponding value -->
+				<!-- For example, the description "TREP11 TREP DNA transposon, CACTA, DTC_unnamed_AJ406396-1" will be replaced by "TIR_CACTA" -->
+
+				<!-- Common Superfamilies -->
+				<entry key="superfamilies">
+					<entry key="gypsy">LTR_Gypsy</entry>
+					<entry key="copia">LTR_Copia</entry>
+					<entry key="CACTA">TIR_CACTA</entry>
+					<entry key="athila">LTR_Gypsy</entry>
+					<entry key="mutator">TIR_Mutator</entry>
+					<entry key="harbinger">TIR_Harbinger</entry>
+				</entry>
+
+				<!-- Orders -->
+				<entry key="orders">
+					<entry key="LTR">LTR</entry>
+					<entry key="DIRS">DIRS</entry>
+					<entry key="PLE">PLE</entry>
+					<entry key="LINE">LINE</entry>
+					<entry key="SINE">SINE</entry>
+					<entry key="TIR">TIR</entry>
+					<entry key="Crypton">Crypton</entry>
+					<entry key="Helitron">Helitron</entry>
+					<entry key="Maverick">Maverick</entry>
+				</entry>
+
+				<!-- TE structural groups -->
+				<entry key="groups">
+					<entry key="MITE">MITE</entry>
+					<entry key="LITE">LITE</entry>
+					<entry key="TRIM">TRIM</entry>
+					<entry key="LARD">LARD</entry>
+				</entry>
+			</entry>
+		</entry>
+
+	</section>
+</triannotConf>

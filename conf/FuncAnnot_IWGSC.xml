@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="FuncAnnot_IWGSC">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|Blast|bin</entry>
+			<entry>PATHS|soft|HMMscan|bin</entry>
+			<entry>FuncAnnot</entry>
+		</entry>
+
+		<entry key="additionalConfigurationSectionsToInclude" description="List of configuration sections that defines other parameters that will be included in this section during the loading procedure">
+			<entry>FuncAnnot</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<!-- Databases -->
+			<entry key="database_STEP01">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|db</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="listOfValuesFilter">
+					<entry key="filterPath">availableFormats</entry>
+					<entry key="filterMode">values</entry>
+					<entry key="filterAllowedValues">
+						<entry>ProteicBlast</entry>
+					</entry>
+				</entry>
+			</entry>
+
+			<entry key="database_STEP02">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|db</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="listOfValuesFilter">
+					<entry key="filterPath">availableFormats</entry>
+					<entry key="filterMode">values</entry>
+					<entry key="filterAllowedValues">
+						<entry>ProteicBlast</entry>
+					</entry>
+				</entry>
+			</entry>
+
+			<entry key="database_STEP03">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|db</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="listOfValuesFilter">
+					<entry key="filterPath">availableFormats</entry>
+					<entry key="filterMode">values</entry>
+					<entry key="filterAllowedValues">
+						<entry>HMM</entry>
+					</entry>
+				</entry>
+			</entry>
+
+			<entry key="database_STEP04">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|db</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="listOfValuesFilter">
+					<entry key="filterPath">availableFormats</entry>
+					<entry key="filterMode">values</entry>
+					<entry key="filterAllowedValues">
+						<entry>NucleicBlast</entry>
+					</entry>
+				</entry>
+			</entry>
+
+			<entry key="database_STEP06">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|db</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="listOfValuesFilter">
+					<entry key="filterPath">availableFormats</entry>
+					<entry key="filterMode">values</entry>
+					<entry key="filterAllowedValues">
+						<entry>ProteicBlast</entry>
+					</entry>
+				</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<entry key="featureTypeToAnnotate" description="Type of feature that you want to annotate">
+				<entry key="defaultValue">mRNA</entry>
+				<entry key="type">string</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_GENEMODEL.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_GENEMODEL.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|gene</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">geneWithoutExonWithJoinedCDS</entry>
+			</entry>
+
+			<entry key="EMBLRename.polypeptide">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">CDS</entry>
+			</entry>
+		</entry>
+
+		<entry key="AnnotationSteps">
+			<entry key="annotationProcedureName">IWGSC</entry>
+			<entry key="STEP01">
+				<entry key="programName">Blast</entry>
+				<entry key="type">blastp</entry>
+				<entry key="evalue">1e-5</entry>
+				<entry key="concatQueries">1</entry>
+				<entry key="concatDb">1</entry>
+				<entry key="performAlign">T</entry>
+				<entry key="filterSeq">T</entry>
+				<entry key="annotation_class">known_function</entry>
+				<entry key="identityCutOff">80</entry>
+				<entry key="coverageCutOff">80</entry>
+				<entry key="keepHypothetical">no</entry>
+				<entry key="keepTElikeOnly">no</entry>
+			</entry>
+			<entry key="STEP02">
+				<entry key="programName">Blast</entry>
+				<entry key="type">blastp</entry>
+				<entry key="evalue">1e-5</entry>
+				<entry key="concatQueries">1</entry>
+				<entry key="concatDb">1</entry>
+				<entry key="performAlign">T</entry>
+				<entry key="filterSeq">T</entry>
+				<entry key="annotation_class">putative_function</entry>
+				<entry key="identityCutOff">45</entry>
+				<entry key="coverageCutOff">50</entry>
+				<entry key="keepHypothetical">no</entry>
+				<entry key="keepTElikeOnly">no</entry>
+			</entry>
+			<entry key="STEP03">
+				<entry key="programName">HMMscan</entry>
+				<entry key="evalue">1e-5</entry>
+				<entry key="cpu">getValue(FuncAnnot|execParameters|nbCore|defaultValue)</entry>
+				<entry key="annotation_class">domain_containing_protein</entry>
+			</entry>
+			<entry key="STEP04">
+				<entry key="programName">Blast</entry>
+				<entry key="type">tblastn</entry>
+				<entry key="evalue">1e-5</entry>
+				<entry key="concatQueries">1</entry>
+				<entry key="concatDb">1</entry>
+				<entry key="performAlign">T</entry>
+				<entry key="filterSeq">T</entry>
+				<entry key="annotation_class">expressed_sequence</entry>
+				<entry key="identityCutOff">45</entry>
+				<entry key="coverageCutOff">50</entry>
+				<entry key="keepHypothetical">yes</entry>
+				<entry key="keepTElikeOnly">no</entry>
+			</entry>
+			<entry key="STEP05" description="Important Note: this Step is not executed, it consists in STep02 Hypothetical results">
+				<entry key="annotation_class">conserved_unknown_function</entry>
+				<entry key="is_virtual">yes</entry>
+			</entry>
+			<entry key="STEP06">
+				<entry key="programName">Blast</entry>
+				<entry key="type">blastp</entry>
+				<entry key="evalue">1e-5</entry>
+				<entry key="concatQueries">1</entry>
+				<entry key="concatDb">1</entry>
+				<entry key="performAlign">T</entry>
+				<entry key="filterSeq">T</entry>
+				<entry key="annotation_class">Warning - Possible Transposable Element</entry>
+				<entry key="identityCutOff">35</entry>
+				<entry key="coverageCutOff">40</entry>
+				<entry key="keepHypothetical">yes</entry>
+				<entry key="keepTElikeOnly">yes</entry>
+			</entry>
+			<entry key="NoResultMessage">hypothetical_protein</entry>
+		</entry>
+
+	</section>
+</triannotConf>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="GMAP">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|GMAP|bin</entry>
+		</entry>
+
+		<entry key="commonParameters">
+			<entry key="database">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|db</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="listOfValuesFilter">
+					<entry key="filterPath">availableFormats</entry>
+					<entry key="filterMode">values</entry>
+					<entry key="filterAllowedValues">
+						<entry>NucleicBlast</entry>
+					</entry>
+				</entry>
+			</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<entry key="miniBankPrefix" description="When using a minibank please provide a miniBankPrefix">
+				<entry key="type">string</entry>
+			</entry>
+			<entry key="intronLength" description="-K, --intronlength=INT / Max length for one intron (default 1000000)">
+				<entry key="defaultValue">1000000</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+			</entry>
+			<entry key="totalLength" description="-L, --totallength=INT / Max total intron length (default 2400000)">
+				<entry key="defaultValue">2400000</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+			</entry>
+			<entry key="batchMode" description="-B, --batch=INT / Batch mode (0 = no pre-loading, 1 = pre-load only indices, 2 (default) = pre-load both indices and genome)">
+				<entry key="defaultValue">2</entry>
+				<entry key="type">number</entry>
+				<entry key="possibleValues">
+					<entry>0</entry>
+					<entry>1</entry>
+					<entry>2</entry>
+				</entry>
+			</entry>
+			<entry key="outFile" description="Name to use for the Exonerate out file">
+				<entry key="defaultValue">{step}_GMAP_{database}.res</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+			<entry key="nbCore" description="-t, --nthreads=INT / Number of worker threads / Note that there are 2 additionnal thread for input reading and output writing -> if -t = 8 then the real number of threads will be 10">
+				<entry key="defaultValue">getValue(Runners|getRunnerName()|defaultNumberOfThread)</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">1</entry>
+				<entry key="maxValue">getValue(Runners|getRunnerName()|maximumNumberOfThreadByTool)</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<entry key="keepPredictedCDS" description="Possible values are: yes|no">
+				<entry key="defaultValue">no</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+
+			<!-- Custom feature source -->
+			<entry key="sourceTag" description="Source Tag to use during features creation">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">GMAP_{database}</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_GMAP_{database}.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_GMAP_{database}.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|gene</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">joinedCDSOnly</entry>
+			</entry>
+
+			<entry key="EMBLRename.CDS">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">GMAP_{database}</entry>
+			</entry>
+			<entry key="EMBLRename.polypeptide">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">GMAP_{database}</entry>
+			</entry>
+		</entry>
+
+	</section>
+</triannotConf>

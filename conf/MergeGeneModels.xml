@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="MergeGeneModels">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|Blast|bin</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<!-- Manually curated prediction -->
+			<entry key="manuallyCuratedPrediction">
+				<entry key="mandatory">no</entry>
+				<entry key="type">string</entry>
+			</entry>
+
+			<!-- Gene Model Predictions -->
+			<entry key="automaticPredictions">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">string</entry>
+				<entry key="isArray">yes</entry>
+			</entry>
+
+			<!-- High Quality Nucleic Biological evidences -->
+			<entry key="highQualityNucleicEvidences">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">string</entry>
+				<entry key="isArray">yes</entry>
+			</entry>
+
+			<!-- Other Nucleic Biological evidences -->
+			<entry key="otherNucleicEvidences">
+				<entry key="mandatory">no</entry>
+				<entry key="type">string</entry>
+				<entry key="isArray">yes</entry>
+			</entry>
+
+			<!-- Proteic Biological evidences -->
+			<entry key="proteicEvidences">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">string</entry>
+				<entry key="isArray">yes</entry>
+			</entry>
+
+			<!-- Blast execution parameters -->
+			<entry key="type">
+				<entry key="type">string</entry>
+				<entry key="defaultValue">BLASTP</entry>
+				<entry key="possibleValues">
+					<entry>BLASTP</entry>
+				</entry>
+			</entry>
+			<entry key="database">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|db</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="listOfValuesFilter">
+					<entry key="filterPath">availableFormats</entry>
+					<entry key="filterMode">values</entry>
+					<entry key="filterAllowedValues">
+						<entry>ProteicBlast</entry>
+					</entry>
+				</entry>
+			</entry>
+			<entry key="nbCore" description="-a">
+				<entry key="defaultValue">getValue(Runners|getRunnerName()|defaultNumberOfThread)</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">1</entry>
+				<entry key="maxValue">getValue(Runners|getRunnerName()|maximumNumberOfThreadByTool)</entry>
+			</entry>
+			<entry key="evalue" description="-e">
+				<entry key="defaultValue">1e-5</entry>
+				<entry key="type">number</entry>
+			</entry>
+
+			<!-- Blast parsing parameters -->
+			<!-- Explanations:
+				- Blast hits below the identityThreshold will be directly rejected
+				- Blast hits over every thresholds will be conserved (Over identityThreshold, highHitCoverageThreshold and queryCoverageThreshold)
+
+				- Blast Hits that are over the identityThreshold and queryCoverageThreshold but are:
+					- between highHitCoverageThreshold and lowHitCoverageThreshold will be conserved but tagged PSEUDO
+					- under the lowHitCoverageThreshold will be conserved but tagged FRAGMENT
+			-->
+			<entry key="identityThreshold"> <!-- Blast hit below this threshold will be fully rejected -->
+				<entry key="defaultValue">0.35</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+				<entry key="maxValue">1</entry>
+			</entry>
+			<entry key="highHitCoverageThreshold">
+				<entry key="defaultValue">0.70</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+				<entry key="maxValue">1</entry>
+			</entry>
+			<entry key="lowHitCoverageThreshold">
+				<entry key="defaultValue">0.50</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+				<entry key="maxValue">1</entry>
+			</entry>
+			<entry key="queryCoverageThreshold">
+				<entry key="defaultValue">0.60</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+				<entry key="maxValue">1</entry>
+			</entry>
+
+			<!-- Ouput related parameters -->
+			<entry key="outFile" description="Name to use for the MergeGeneModels out file">
+				<entry key="defaultValue">{step}_MERGE.gff</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+
+			<entry key="gffForTranspoLikeGeneModels" description="Name of the secondary GFF file which will store genes identified as transposase (transpo-like)">
+				<entry key="defaultValue">{step}_MERGE_rejected.gff</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+
+			<entry key="addBlastpFileTag" description="Whether to add (or not) a blastp_file tag in the GFF and EMBL file (Could be exploited by Artemis)">
+				<entry key="defaultValue">no</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+
+			<entry key="addFastaFileTag" description="Whether to add (or not) a fasta_file tag in the GFF and EMBL file (Could be exploited by Artemis)">
+				<entry key="defaultValue">no</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+
+			<entry key="addBestBlastHitTags" description="Whether to add (or not) the Best blast hit tags (Best blast hit description, identity, coverage..) in the GFF and EMBL file">
+				<entry key="defaultValue">no</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+
+			<entry key="moveBlastResultsToEmblDirectory" description="Whether to move (or not) the BlastP output files in a subdirectory of the EMBL directory (Could be exploited by Artemis)">
+				<entry key="defaultValue">no</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+
+			<entry key="emblSubDirectoryForBlastFiles" description="Name of the EMBL sub directory which will store blastp results (Changing this name will break Artemis compatibility)">
+				<entry key="defaultValue">blastp</entry>
+				<entry key="type">string</entry>
+			</entry>
+
+			<entry key="moveProteinFastaToEmblDirectory" description="Whether to move (or not) the proteic fasta files in a subdirectory of the EMBL directory (Could be exploited by Artemis)">
+				<entry key="defaultValue">no</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+
+			<entry key="emblSubDirectoryForFastaFiles" description="Name of the EMBL sub directory which will store proteic fasta file (Changing this name will break Artemis compatibility)">
+				<entry key="defaultValue">fasta</entry>
+				<entry key="type">string</entry>
+			</entry>
+
+			<!-- Misc -->
+			<entry key="validationRange" description="Range in nucleotides for start/end validation by proteic evidences (from wheat or other species)">
+				<entry key="type">number</entry>
+				<entry key="defaultValue">21</entry>
+			</entry>
+
+			<entry key="minimumIntronLength" description="A gene model containing an intron shorter than minimumIntronLength nulceotides will be considered pseudogene">
+				<entry key="type">number</entry>
+				<entry key="defaultValue">10</entry>
+			</entry>
+
+			<entry key="databaseNamesForExpressionCheck" description="A CDS will be tagged expressed if it exists at least 1 overlapping evidences for this CDS in one of the database listed with this parameter">
+				<entry key="type">string</entry>
+				<entry key="isArray">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<!-- Custom feature source -->
+			<entry key="sourceTag" description="Source Tag to use during features creation">
+				<entry key="type">string</entry>
+				<entry key="defaultValue">GENEMODEL</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_MERGE.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_MERGE.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|gene</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">geneWithoutExonWithJoinedCDS</entry>
+			</entry>
+
+			<entry key="EMBLRename.polypeptide">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">CDS</entry>
+			</entry>
+		</entry>
+
+		<entry key="reconstructionParameters">
+			<entry key="activateReconstruction" description="Activate or desactivate the global result files reconstruction for splitted sequences">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+		</entry>
+
+		<entry key="Transposase_like_keywords" description="MergeGeneModels rejects CDS predicted as transposase. Use this list to define which keywords will be considered transpo-like (case insensitive)">
+			<entry>transposase</entry>
+			<entry>transposable</entry>
+			<entry>transposon</entry>
+			<entry>retrotransposon</entry>
+		</entry>
+
+		<!-- Bonus / Malus to appply during the computation of Gene Model's score -->
+		<entry key="bonusScore">
+			<entry key="hitCoverageOver100" description="Bonus to apply when the hit coverage is greater than 100">100</entry>
+			<entry key="queryCoverageOver100" description="Bonus to apply when the query coverage is greater than 100">100</entry>
+			<entry key="allValidSplice" description="Bonus to apply when the START, END and all splice have been validated by biological evidences">200</entry>
+			<entry key="manuallyCurated" description="Bonus to apply for manually curated gene models">50</entry>
+		</entry>
+
+		<entry key="malusScore"> <!-- Do not add a "-" sign in front of the value, it will be automatically considered as a malus inside the MergeGeneModels -->
+			<entry key="queryCoverageBelow70" description="Malus to apply when the query coverage is lower than 70">100</entry>
+			<entry key="taggedPartiallySequenced" description="Malus to apply when the CDS is tagged partially_sequenced">50</entry>
+			<entry key="taggedWrong_Splice" description="Malus to apply when the CDS is tagged wrong_splice">50</entry>
+		</entry>
+
+	</section>
+</triannotConf>

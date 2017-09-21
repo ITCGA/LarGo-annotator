@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="BlastX">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|BlastX|bin</entry>
+			<entry>BlastPlus</entry>
+		</entry>
+
+		<entry key="additionalConfigurationSectionsToInclude" description="List of configuration sections that defines other parameters that will be included in this section during the loading procedure">
+			<entry>BlastPlus</entry>
+		</entry>
+
+		<entry key="commonParameters">
+			<entry key="database">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|db</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="listOfValuesFilter">
+					<entry key="filterPath">availableFormats</entry>
+					<entry key="filterMode">values</entry>
+					<entry key="filterAllowedValues">
+						<entry>ProteicBlast</entry>
+					</entry>
+				</entry>
+			</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<!-- Input query options -->
+			<entry key="strand" description="-strand - Query strand(s) to search against database/subject">
+				<entry key="defaultValue">both</entry>
+				<entry key="type">string</entry>
+				<entry key="possibleValues">
+					<entry>both</entry>
+					<entry>minus</entry>
+					<entry>plus</entry>
+				</entry>
+			</entry>
+
+			<entry key="queryGeneticCode" description="-query_gencode - Genetic code to use to translate query">
+				<entry key="defaultValue">1</entry>
+				<entry key="type">string</entry>
+				<entry key="possibleValues">
+					<entry>1</entry> <!-- The Standard Code -->
+					<entry>2</entry> <!-- The Vertebrate Mitochondrial Code -->
+					<entry>3</entry> <!-- The Yeast Mitochondrial Code -->
+					<entry>4</entry> <!-- The Mold Protozoan and Coelenterate Mitochondrial Code and the Mycoplasma Spiroplasma Code -->
+					<entry>5</entry> <!-- The Invertebrate Mitochondrial Code -->
+					<entry>6</entry> <!-- The Ciliate Dasycladacean and Hexamita Nuclear Code -->
+					<entry>9</entry> <!-- The Echinoderm and Flatworm Mitochondrial Code -->
+					<entry>10</entry> <!-- The Euplotid Nuclear Code -->
+					<entry>11</entry> <!-- The Bacterial Archaeal and Plant Plastid Code -->
+					<entry>12</entry> <!-- The Alternative Yeast Nuclear Code -->
+					<entry>13</entry> <!-- The Ascidian Mitochondrial Code -->
+					<entry>14</entry> <!-- The Alternative Flatworm Mitochondrial Code -->
+					<entry>15</entry> <!-- Blepharisma Nuclear Code -->
+					<entry>16</entry> <!-- Chlorophycean Mitochondrial Code -->
+					<entry>21</entry> <!-- Trematode Mitochondrial Code -->
+					<entry>22</entry> <!-- Scenedesmus obliquus mitochondrial Code -->
+					<entry>23</entry> <!-- Thraustochytrium Mitochondrial Code -->
+					<entry>24</entry> <!-- Pterobranchia Mitochondrial Code -->
+					<entry>25</entry> <!-- Candidate Division SR1 and Gracilibacteria Code -->
+				</entry>
+			</entry>
+
+			<!-- General search options -->
+			<entry key="matrix" description="-matrix - Scoring matrix name">
+				<entry key="defaultValue">BLOSUM62</entry>
+				<entry key="type">string</entry>
+				<entry key="possibleValues">
+					<entry>BLOSUM45</entry>
+					<entry>BLOSUM50</entry>
+					<entry>BLOSUM62</entry>
+					<entry>BLOSUM80</entry>
+					<entry>PAM70</entry>
+					<entry>PAM250</entry>
+				</entry>
+			</entry>
+
+			<entry key="maxIntronLength" description="-max_intron_length - Length of the largest intron allowed in a translated nucleotide sequence when linking multiple distinct alignments (a negative value disables linking)">
+				<entry key="type">number</entry>
+				<entry key="minValue">-1</entry>
+			</entry>
+
+			<!-- Query filtering options -->
+			<entry key="queryFiltering" description="-seg - Filter query sequence with SEG">
+				<entry key="defaultValue">12 2.2 2.5</entry>
+				<entry key="type">string</entry> <!-- Boolean type cannot be used, see blastx -help for more informations -->
+			</entry>
+
+			<!-- Output options -->
+			<entry key="outFile" description="Name to use for the blast out file">
+				<entry key="defaultValue">{step}_BLASTX_{database}.res</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<!-- Custom feature source -->
+			<entry key="sourceTag" description="Source Tag to use during features creation">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">BLASTX_{database}</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_BLASTX_{database}.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_BLASTX_{database}.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLRename.match">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+			<entry key="EMBLRename.match_part">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">BLASTX_{database}</entry>
+			</entry>
+		</entry>
+
+	</section>
+</triannotConf>

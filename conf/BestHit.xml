@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="BestHit">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|BestHit|bin</entry>
+		</entry>
+
+		<entry key="commonParameters">
+			<entry key="type">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">string</entry>
+				<entry key="possibleValues">
+					<entry>BLASTP</entry>
+					<entry>TBLASTN</entry>
+				</entry>
+			</entry>
+			<entry key="database">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|db</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="listOfValuesFilter">
+					<entry key="filterPath">availableFormats</entry>
+					<entry key="filterMode">values</entry>
+					<entry key="filterAllowedValues">
+						<entry>ProteicBlast</entry>
+					</entry>
+				</entry>
+			</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<entry key="evalue" description="-e">
+				<entry key="defaultValue">1e-25</entry>
+				<entry key="type">number</entry>
+			</entry>
+			<entry key="performAlign" description="-g Perform gapped alignment (not available with tblastx)">
+				<entry key="defaultValue">T</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">T</entry>
+				<entry key="falseValue">F</entry>
+			</entry>
+			<entry key="filterSeq" description="-F Filter query sequence (DUST with blastn, SEG with others)">
+				<entry key="defaultValue">F</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">T</entry>
+				<entry key="falseValue">F</entry>
+			</entry>
+			<entry key="nbAlignHit" description="-b Number of database sequence to show alignments for">
+				<entry key="defaultValue">1</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">1</entry>
+			</entry>
+			<entry key="nbOneLineHit" description="-v Number of database sequences to show one-line descriptions for">
+				<entry key="defaultValue">1</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">1</entry>
+			</entry>
+			<entry key="nbCore" description="-a">
+				<entry key="defaultValue">getValue(Runners|getRunnerName()|defaultNumberOfThread)</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">1</entry>
+				<entry key="maxValue">getValue(Runners|getRunnerName()|maximumNumberOfThreadByTool)</entry>
+			</entry>
+			<entry key="outFile" description="Name to use for the besthit out file">
+				<entry key="defaultValue">{step}_BESTHIT_{type}_{database}.res</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<entry key="positive_threshold">
+				<entry key="defaultValue">0.80</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+				<entry key="maxValue">1</entry>
+			</entry>
+			<entry key="coverageThreshold">
+				<entry key="defaultValue">0.80</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+				<entry key="maxValue">1</entry>
+			</entry>
+			<entry key="keep_alignment">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+			<entry key="max_gap_size">
+				<entry key="defaultValue">9</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+			</entry>
+			<entry key="hitListFile" description="Name of the hit list file to create">
+				<entry key="defaultValue">{database}_BestHit_list.txt</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+			<entry key="alignFile" description="Name of the align file to create">
+				<entry key="defaultValue">{step}_BESTHIT_{type}_{database}.align</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+
+			<!-- Custom feature source -->
+			<entry key="sourceTag" description="Source Tag to use during features creation">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">BESTHIT_{database}</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_BESTHIT_{type}_{database}.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_BESTHIT_{type}_{database}.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|match</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">joinedMatchPartOnly</entry>
+			</entry>
+
+			<entry key="EMBLRename.match">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+			<entry key="EMBLRename.match_part">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="reconstructionParameters">
+			<entry key="activateReconstruction" description="Activate or desactivate the global result files reconstruction for splitted sequences">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+		</entry>
+
+		<entry key="UnAuthorized_entity" description="List of xml element to suppress of the Blast brut output file during the cleaning process with Twig">
+			<entry>BlastOutput_reference</entry>
+			<entry>BlastOutput_param</entry>
+			<entry>Parameters</entry>
+			<entry>iter-num</entry>
+			<entry>Iteration_stat</entry>
+			<entry>Statistics</entry>
+			<entry>mid</entry>
+			<entry>seq</entry>
+			<entry>accession</entry>
+		</entry>
+
+	</section>
+</triannotConf>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="RepeatMasker">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|RepeatMasker|bin</entry>
+		</entry>
+
+		<entry key="commonParameters">
+			<entry key="database">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|db</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="listOfValuesFilter">
+					<entry key="filterPath">availableFormats</entry>
+					<entry key="filterLogicalOperator">and</entry>
+					<entry key="filterMode">values</entry>
+					<entry key="filterAllowedValues">
+						<entry>Fasta</entry>
+						<entry>NucleicBlast</entry> <!-- Required for the parsing step -->
+					</entry>
+				</entry>
+				<entry key="additionalValues">
+					<entry>RMdb</entry>
+				</entry>
+			</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<entry key="speed" description="Analysis speed / Possible values [s|d|q|qq] (d for default)">
+				<entry key="defaultValue">qq</entry>
+				<entry key="type">string</entry>
+				<entry key="possibleValues">
+					<entry>s</entry>
+					<entry>d</entry>
+					<entry>q</entry>
+					<entry>qq</entry>
+				</entry>
+			</entry>
+			<entry key="engine" description="Search engine / Possible values are [crossmatch|wublast|decypher]">
+				<entry key="defaultValue">crossmatch</entry>
+				<entry key="type">string</entry>
+				<entry key="possibleValues">
+					<entry>crossmatch</entry>
+					<entry>wublast</entry>
+					<entry>decypher</entry>
+				</entry>
+			</entry>
+			<entry key="cutoff" description="Cutoff score for masking repeats when using -lib (default 225)">
+				<entry key="defaultValue">225</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">100</entry>
+				<entry key="maxValue">250</entry>
+			</entry>
+			<entry key="species" description="Specify the species or clade of the input sequence. The species name must be a valid NCBI Taxonomy Database species name and be contained in the RepeatMasker repeat database / 'none' is an artificial value that specify that we do not want to use a particular species for the current analysis">
+				<entry key="defaultValue">none</entry>
+				<entry key="type">string</entry>
+			</entry>
+			<entry key="mask_low_complexity" description="If this value is equal to 'no' then the RepeatMasker option '-nolow' will be used / -nolow = Does not mask low_complexity DNA or simple repeats">
+				<entry key="defaultValue">no</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+			<entry key="mask_small_rna" description="If this value is equal to 'no' then the RepeatMasker option '-norna' will be used / -norna = Does not mask small RNA (pseudo) genes">
+				<entry key="defaultValue">no</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+			<entry key="skip_bacterial_insertion" description="If this value is equal to 'yes' then the RepeatMasker option '-no_is' will be used / -no_is = Skips bacterial insertion element check">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+			<entry key="nbCore" description="The number of thread to use in parallel (only works for batch files or sequences over 50 kb)">
+				<entry key="defaultValue">getValue(Runners|getRunnerName()|defaultNumberOfThread)</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">1</entry>
+				<entry key="maxValue">getValue(Runners|getRunnerName()|maximumNumberOfThreadByTool)</entry>
+			</entry>
+			<entry key="outFile" description="Name to use for the RepeatMasker out file">
+				<entry key="defaultValue">{step}_REPEATMASKER_{database}.out</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+			<entry key="xmFile" description="Name to use for the RepeatMasker xm file">
+				<entry key="defaultValue">{step}_REPEATMASKER_{database}.xm</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<!-- Custom feature source -->
+			<entry key="sourceTag" description="Source Tag to use during features creation">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">REPEATMASKER_{database}</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_REPEATMASKER_{database}.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_REPEATMASKER_{database}.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|repeat</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">repeatRegionOnly</entry>
+			</entry>
+
+			<entry key="EMBLRename.repeat_region">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">RM_{database}</entry>
+			</entry>
+		</entry>
+
+		<entry key="reconstructionParameters">
+			<entry key="activateReconstruction" description="Activate or desactivate the global result files reconstruction for splitted sequences">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+		</entry>
+
+	</section>
+</triannotConf>

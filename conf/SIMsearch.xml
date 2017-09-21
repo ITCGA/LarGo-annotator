@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="SIMsearch">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|SIMsearch|bin</entry>
+			<entry>PATHS|soft|map|bin</entry>
+			<entry>PATHS|soft|orf|bin</entry>
+			<entry>PATHS|soft|ext|bin</entry>
+			<entry>PATHS|soft|eij|bin</entry>
+			<entry>PATHS|soft|modo|bin</entry>
+			<entry>PATHS|soft|modg|bin</entry>
+			<entry>PATHS|soft|Exonerate|bin</entry>
+			<entry>PATHS|soft|formatdb|bin</entry>
+			<entry>PATHS|soft|fastacmd|bin</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<entry key="transcriptsDb">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|db</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="listOfValuesFilter">
+					<entry key="filterPath">availableFormats</entry>
+					<entry key="filterLogicalOperator">and</entry>
+					<entry key="filterMode">values</entry>
+					<entry key="filterAllowedValues">
+						<entry>NucleicBlast</entry>
+						<entry>Fasta</entry>
+					</entry>
+				</entry>
+			</entry>
+
+			<entry key="proteinDb">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|db</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="listOfValuesFilter">
+					<entry key="filterPath">availableFormats</entry>
+					<entry key="filterMode">values</entry>
+					<entry key="filterAllowedValues">
+						<entry>ProteicBlast</entry>
+					</entry>
+				</entry>
+			</entry>
+			<entry key="abinitioGff">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">string</entry>
+			</entry>
+			<entry key="autoAnnotFileName">
+				<entry key="defaultValue">auto_annotation.ctl</entry>
+				<entry key="type">string</entry>
+			</entry>
+			<entry key="mapFileName">
+				<entry key="defaultValue">map.ctl</entry>
+				<entry key="type">string</entry>
+			</entry>
+			<entry key="orfFileName">
+				<entry key="defaultValue">orf.ctl</entry>
+				<entry key="type">string</entry>
+			</entry>
+			<entry key="nbCore">
+				<entry key="defaultValue">getValue(Runners|getRunnerName()|defaultNumberOfThread)</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">1</entry>
+				<entry key="maxValue">getValue(Runners|getRunnerName()|maximumNumberOfThreadByTool)</entry>
+			</entry>
+
+			<entry key="keepBlastResult" description="Whether to keep or not the intermediate blast result file. Possible values (yes|no)">
+				<entry key="defaultValue">no</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+			<entry key="outFile" description="Name to use for the SIMsearch out file">
+				<entry key="defaultValue">SIMsearch.raw.gff</entry>
+				<entry key="type">string</entry>
+			</entry>
+
+			<!-- Start of auto_annotation.pl parameters -->
+			<entry key="autoannot.PRIORITY" description="ID_AA: amino acid identity, CAT: category of source transcript, ORF_LEN: length of CDS, EXON: number of exons, RANGE: length of transcript (mapped region), ID_NA: nucleotide identity,  CV_NA: sequence coverage">
+				<entry key="defaultValue">CV_NA,ID_NA,RANGE,EXON,ORF_LEN,ID_AA,CAT</entry> <!-- Last SIMsearch version -->
+				<entry key="type">string</entry>
+				<entry key="validationRegex">^(?:(CAT|CV_NA|ORF_LEN|ID_AA|ID_NA|RANGE|EXON)(?:,(?!$)|$)(?!.*\1))+$</entry>
+				<entry key="invalidRegexMessage">PRIORITY must be a comma separated list (without spaces) of the following keywords (each keyword must appear exactly once): CAT, CV_NA, ORF_LEN, ID_AA, ID_NA, RANGE, EXON</entry>
+			</entry>
+			<entry key="autoannot.EXT_OPT" description="add '-e 0' to turn off the 5/3ext">
+				<entry key="defaultValue">-f 1 -a 2</entry>
+				<entry key="type">string</entry>
+			</entry>
+			<entry key="autoannot.CATEGORY" description="Genemodel category">
+				<entry key="defaultValue">CAT01</entry>
+				<entry key="type">string</entry>
+			</entry>
+
+			<!-- Start of bl2fna_exonerate.pl parameters -->
+			<entry key="map.T_GAP">
+				<entry key="defaultValue">10</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+			</entry>
+			<entry key="map.G_GAP">
+				<entry key="defaultValue">10000</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+			</entry>
+			<entry key="map.ID_HSP">
+				<entry key="defaultValue">0.80</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+				<entry key="maxValue">1</entry>
+			</entry>
+			<entry key="map.CV_HIT">
+				<entry key="defaultValue">0.80</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+				<entry key="maxValue">1</entry>
+			</entry>
+			<entry key="map.CLIP_MGN">
+				<entry key="defaultValue">10000</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+			</entry>
+			<entry key="map.ID_FIN">
+				<entry key="defaultValue">0.80</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+				<entry key="maxValue">1</entry>
+			</entry>
+			<entry key="map.CV_FIN">
+				<entry key="defaultValue">0.80</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+				<entry key="maxValue">1</entry>
+			</entry>
+
+			<entry key="map.BLAST_OPT" description="Custom options for Blast in bl2fna_exonerate.pl"> <!-- Warning: DO NOT USE the Blast multithread option (-a) here ! Multithreading can be activated globally (ie. for every compatible tool run by SIMsearch) with the nbCore parameter described above -->
+				<entry key="defaultValue">-p blastn -F 'm D' -U T -e 1e-5</entry>
+				<entry key="type">string</entry>
+			</entry>
+			<entry key="map.EXONERATE_OPT" description="Custom options for Exonerate in bl2fna_exonerate.pl">
+				<entry key="defaultValue">--model est2genome</entry>
+				<entry key="type">string</entry>
+			</entry>
+			<entry key="map.SOURCE">
+				<entry key="defaultValue">SIMsearch_{autoannot.CATEGORY}</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+
+			<!-- Start of fna2orf.pl parameters -->
+			<entry key="orf.MIN_ID">
+				<entry key="defaultValue">0.80</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+				<entry key="maxValue">1</entry>
+			</entry>
+			<entry key="orf.MIN_AA">
+				<entry key="defaultValue">50</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+			</entry>
+
+			<entry key="orf.BLAST_OPT" description="Custom options for Blast in fna2orf.pl">
+				<entry key="defaultValue">-p blastx -F 'm S' -U T -S 1 -e 1e-5 -b 1 -v 1</entry> <!-- Warning: DO NOT USE the Blast multithread option (-a) here ! Multithreading can be activated globally (ie. for every compatible tool run by SIMsearch) with the nbCore parameter described above -->
+				<entry key="type">string</entry>
+			</entry>
+			<entry key="orf.SOURCE">
+				<entry key="defaultValue">SIMsearch_{autoannot.CATEGORY}</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<!-- Custom feature source -->
+			<entry key="sourceTag" description="Source Tag to use during features creation">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">SIMsearch_{autoannot.CATEGORY}_{transcriptsDb}</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_SIMsearch_{autoannot.CATEGORY}_{transcriptsDb}.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_SIMsearch_{autoannot.CATEGORY}_{transcriptsDb}.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|gene</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">joinedCDSOnly</entry>
+			</entry>
+
+			<entry key="EMBLRename.CDS">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">CDS_{autoannot.CATEGORY}</entry>
+			</entry>
+			<entry key="EMBLRename.polypeptide">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">CDS_{autoannot.CATEGORY}</entry>
+			</entry>
+		</entry>
+
+		<entry key="reconstructionParameters">
+			<entry key="activateReconstruction" description="Activate or desactivate the global result files reconstruction for splitted sequences">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+		</entry>
+
+		<!-- The following entry allows you to use a different Blast version than the one defined in the TriAnnotConfig_PATHS XML configuration file (Only during SIMsearch execution) -->
+		<entry key="BLAST_EXE" description="Machine dependant - It correspond to the value of the BLAST_BIN variable in the map configuration file">
+			getValue(PATHS|soft|Blast|bin)
+		</entry>
+
+	</section>
+</triannotConf>

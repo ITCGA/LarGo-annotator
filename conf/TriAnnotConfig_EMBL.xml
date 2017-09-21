@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<!-- Please have a look at the following wiki page before editing this file: https://sourcesup.renater.fr/wiki/triannot/configuration:customize_triannotconfig_embl.xml -->
+
+	<section name="EMBL">
+		<entry key="formats">
+			<entry key="domain">
+				<entry key="keepAllFeatures" description="Special default format that will keep every type of feature"></entry>
+
+				<entry key="joinedPolypeptideDomainPartOnly">
+					<entry key="polypeptide_domain_part">
+						<entry key="join">yes</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+				</entry>
+
+				<entry key="polypeptideDomainAndJoinedPolypeptideDomainPart">
+					<entry key="polypeptide_domain">
+						<entry key="join">no</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+					<entry key="polypeptide_domain_part">
+						<entry key="join">yes</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+				</entry>
+
+				<!-- You can create a new profile here - It will be usable by any tool with "EMBL|formats|domain" as value for the "listOfValuesPath" entry -->
+			</entry>
+
+			<entry key="match">
+				<entry key="keepAllFeatures" description="Special default format that will keep every type of feature"></entry>
+
+				<entry key="joinedMatchPartOnly">
+					<entry key="match_part">
+						<entry key="join">yes</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+				</entry>
+
+				<entry key="matchPartOnly">
+					<entry key="match_part">
+						<entry key="join">no</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+				</entry>
+
+				<entry key="matchAndJoinedMatchPart">
+					<entry key="match">
+						<entry key="join">no</entry>
+						<entry key="removeDetails">yes</entry>
+					</entry>
+					<entry key="match_part">
+						<entry key="join">yes</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+				</entry>
+
+				<!-- You can create a new profile here - It will be usable by any tool with "EMBL|formats|match" as value for the "listOfValuesPath" entry -->
+			</entry>
+
+			<entry key="gene">
+				<entry key="keepAllFeatures" description="Special default format that will keep every type of feature"></entry>
+
+				<entry key="joinedCDSOnly">
+					<entry key="CDS">
+						<entry key="join">yes</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+					<entry key="polypeptide">
+						<entry key="join">yes</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+				</entry>
+
+				<entry key="CDSOnly">
+					<entry key="CDS">
+						<entry key="join">no</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+					<entry key="polypeptide">
+						<entry key="join">no</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+				</entry>
+
+				<entry key="geneWithoutExonWithJoinedCDS">
+					<entry key="gene">
+						<entry key="join">no</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+					<entry key="mRNA">
+						<entry key="join">no</entry>
+						<entry key="removeDetails">yes</entry>
+					</entry>
+					<entry key="CDS">
+						<entry key="join">yes</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+					<entry key="polypeptide">
+						<entry key="join">yes</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+				</entry>
+
+				<entry key="fullGeneWithJoinedCDS">
+					<entry key="gene">
+						<entry key="join">no</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+					<entry key="mRNA">
+						<entry key="join">no</entry>
+						<entry key="removeDetails">yes</entry>
+					</entry>
+					<entry key="exon">
+						<entry key="join">no</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+					<entry key="CDS">
+						<entry key="join">yes</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+					<entry key="polypeptide">
+						<entry key="join">yes</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+				</entry>
+
+				<!-- You can create a new profile here - It will be usable by any tool with "EMBL|formats|gene" as value for the "listOfValuesPath" entry -->
+			</entry>
+
+			<entry key="repeat">
+				<entry key="keepAllFeatures" description="Special default format that will keep every type of feature"></entry>
+
+				<entry key="repeatRegionOnly">
+					<entry key="repeat_region">
+						<entry key="join">no</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+				</entry>
+
+				<entry key="repeatRegionAndJoinedRepeatFragment">
+					<entry key="repeat_region">
+						<entry key="join">no</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+
+					<entry key="repeat_fragment">
+						<entry key="join">yes</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+				</entry>
+
+				<!-- You can create a new profile here - It will be usable by any tool with "EMBL|formats|repeat" as value for the "listOfValuesPath" entry -->
+			</entry>
+
+			<entry key="ORF">
+				<entry key="keepAllFeatures" description="Special default format that will keep every type of feature"></entry>
+
+				<entry key="ORFOnly">
+					<entry key="ORF">
+						<entry key="join">no</entry>
+						<entry key="removeDetails">no</entry>
+					</entry>
+				</entry>
+
+				<!-- You can create a new profile here - It will be usable by any tool with "EMBL|formats|ORF" as value for the "listOfValuesPath" entry -->
+			</entry>
+
+			<entry key="marker">
+				<entry key="keepAllFeatures" description="Special default format that will keep every type of feature"></entry>
+
+				<!-- You can create a new profile here - It will be usable by any tool with "EMBL|formats|marker" as value for the "listOfValuesPath" entry -->
+			</entry>
+
+			<entry key="rna">
+				<entry key="keepAllFeatures" description="Special default format that will keep every type of feature"></entry>
+
+				<!-- You can create a new profile here - It will be usable by any tool with "EMBL|formats|rna" as value for the "listOfValuesPath" entry -->
+			</entry>
+
+		</entry>
+
+		<entry key="createIdQualifierFromFeatureId" description="If set to yes, the ID tag of the GenericSeqFeature will be converted in an id qualifier in the EMBL file">yes</entry>
+
+		<entry key="EMBLColors">
+			<!-- generic names based on TriAnnotConfig_PATHS.xml -->
+			<!-- for Blast -->
+			<entry key="match_part" description="DarkOrange">255 140 0</entry>
+
+			<entry key="Exonerate" description="yellow">255 255 0</entry>
+
+			<entry key="GeneMarkHMM2" description="pink">255 192 203</entry>
+			<entry key="GeneMarkHMM3" description="pink">255 192 203</entry>
+			<entry key="FgeneSH" description="pink">255 192 203</entry>
+			<entry key="GeneID" description="pink">255 192 203</entry>
+			<entry key="Augustus" description="pink">255 192 203</entry>
+			<entry key="Eugene" description="pink">255 192 203</entry>
+
+			<entry key="RepeatMasker" description="purple">128 0 128</entry>
+
+			<entry key="TRNASCAN-SE" description="lavender">230 231 250</entry>
+
+			<entry key="ssrFinder" description="Spicy Pink">255 28 174</entry>
+			<entry key="isbpFinder" description="Spicy Pink">255 28 174</entry>
+			<entry key="TRF" description="Spicy Pink">255 28 174</entry>
+		
+			<!-- Specific names based on EMBL output files for a given species - take the EMBL name  -->
+			<entry key="REPEATMASKER_Ecoli" description="red">255 0 0</entry>
+			<entry key="REPEATMASKER_univec" description="red">255 0 0</entry>
+			<entry key="REPEATMASKER_MIPSrepeatPoa" description="blue">0 0 255</entry>
+			<entry key="BLASTX_TREP_prot" description="aqua">0 255 255</entry>
+
+			<entry key="AUGUSTUS_wheat" description="pink">255 192 203</entry>
+
+			<entry key="BLASTN_refSeqChloro" description="green">0 128 0</entry>
+			<entry key="BLASTN_refSeqMito" description="green">0 128 0</entry>
+
+			<!-- Step 6 - BLASTn -->
+			<entry key="EXONERATE_BLASTN_AnnotSEB" description="Medium Slate Blue">127 0 257</entry>
+			<entry key="EXONERATE_BLASTN_cds3bTAE" description="BlueViolet">138 43 226</entry>
+			<entry key="EXONERATE_BLASTN_rnaSeqWheat" description="gold">255 215 0</entry>
+		</entry>
+
+	</section>
+</triannotConf>

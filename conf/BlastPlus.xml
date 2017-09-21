@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="BlastPlus">
+
+		<entry key="execParameters">
+			<!-- General search options -->
+			<entry key="evalue" description="-evalue - Expectation value (E) threshold for saving hits">
+				<entry key="defaultValue">1e-5</entry>
+				<entry key="type">number</entry>
+			</entry>
+
+			<entry key="wordSize" description="-word_size - Word size for wordfinder algorith">
+				<entry key="type">number</entry>
+			</entry>
+			<entry key="gapOpeningCost" description="-gapopen - Cost to open a gap">
+				<entry key="type">number</entry>
+			</entry>
+			<entry key="gapExtensionCost" description="-gapextend - Cost to extend a gap">
+				<entry key="type">number</entry>
+			</entry>
+
+			<!-- Formatting options -->
+			<!-- TriAnnot authorized XML output format only -->
+
+			<!-- Query filtering options -->
+			<entry key="lowerCaseFilter" description="-lcase_masking - Use lower case filtering in query and subject sequence(s)">
+				<entry key="defaultValue">true</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">true</entry>
+				<entry key="falseValue">false</entry>
+			</entry>
+
+			<!-- Restrict search or results -->
+			<entry key="cullingLimit" description="-culling_limit - If the query range of a hit is enveloped by that of at least this many higher-scoring hits, delete the hit"> <!-- Incompatible with: best_hit_overhang, best_hit_score_edge -->
+				<entry key="type">number</entry>
+				<entry key="minValue">1</entry>
+			</entry>
+
+			<entry key="bestHitOverhang" description="-best_hit_overhang - Best Hit algorithm overhang value (controls when an HSP is considered short enough to be filtered due to presence of another HSP)"> <!-- Incompatible with: culling_limit -->
+				<!-- No default value but a recommended value of 0.1 -->
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+				<entry key="maxValue">0.5</entry>
+			</entry>
+			<entry key="bestHitScoreEdge" description="-best_hit_score_edge - Best Hit algorithm score edge value"> <!-- Incompatible with: culling_limit -->
+				<!-- No default value but a recommended value of 0.1 -->
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+				<entry key="maxValue">0.5</entry>
+			</entry>
+
+			<entry key="maxTargetSeqs" description="-max_target_seqs - Maximum number of aligned sequences to keep">
+				<entry key="defaultValue">500</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">1</entry>
+			</entry>
+
+			<!-- Extension options -->
+			<entry key="windowSize" description="-window_size - Multiple hits window size, use 0 to specify 1-hit algorithm">
+				<entry key="type">number</entry>
+			</entry>
+
+			<!-- Other options -->
+			<entry key="nbCore" description="-num_threads - Number of threads (CPUs) to use in the BLAST search">
+				<entry key="defaultValue">getValue(Runners|getRunnerName()|defaultNumberOfThread)</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">1</entry>
+				<entry key="maxValue">getValue(Runners|getRunnerName()|maximumNumberOfThreadByTool)</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<entry key="identity_threshold">
+				<entry key="defaultValue">0.90</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+				<entry key="maxValue">1</entry>
+			</entry>
+			<entry key="coverageThreshold">
+				<entry key="defaultValue">0.85</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+				<entry key="maxValue">1</entry>
+			</entry>
+			<entry key="positive_threshold">
+				<entry key="defaultValue">0.70</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+				<entry key="maxValue">1</entry>
+			</entry>
+			<entry key="remove_hit_below_thresholds">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+
+			<entry key="hitListFile" description="Name of the hit list file to create">
+				<entry key="defaultValue">{database}_Hit_list.txt</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|match</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">joinedMatchPartOnly</entry>
+			</entry>
+		</entry>
+
+		<entry key="reconstructionParameters">
+			<entry key="activateReconstruction" description="Activate or desactivate the global result files reconstruction for splitted sequences">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+		</entry>
+
+		<entry key="GeneticCodes">
+			<entry key="1">The Standard Code</entry>
+			<entry key="2">The Vertebrate Mitochondrial Code</entry>
+			<entry key="3">The Yeast Mitochondrial Code</entry>
+			<entry key="4">The Mold and Protozoan and Coelenterate Mitochondrial Code and the Mycoplasma Spiroplasma Code</entry>
+			<entry key="5">The Invertebrate Mitochondrial Code</entry>
+			<entry key="6">The Ciliate and Dasycladacean and Hexamita Nuclear Code</entry>
+			<entry key="9">The Echinoderm and Flatworm Mitochondrial Code</entry>
+			<entry key="10">The Euplotid Nuclear Code</entry>
+			<entry key="11">The Bacterial and Archaeal and Plant Plastid Code</entry>
+			<entry key="12">The Alternative Yeast Nuclear Code</entry>
+			<entry key="13">The Ascidian Mitochondrial Code</entry>
+			<entry key="14">The Alternative Flatworm Mitochondrial Code</entry>
+			<entry key="15">Blepharisma Nuclear Code</entry>
+			<entry key="16">Chlorophycean Mitochondrial Code</entry>
+			<entry key="21">Trematode Mitochondrial Code</entry>
+			<entry key="22">Scenedesmus obliquus mitochondrial Code</entry>
+			<entry key="23">Thraustochytrium Mitochondrial Code</entry>
+			<entry key="24">Pterobranchia Mitochondrial Code</entry>
+			<entry key="25">Candidate Division SR1 and Gracilibacteria Code</entry>
+		</entry>
+
+	</section>
+</triannotConf>

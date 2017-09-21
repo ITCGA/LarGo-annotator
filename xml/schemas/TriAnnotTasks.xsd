@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0">
+
+<xs:element name="analysis">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element name="program"  minOccurs="1" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="dependences"  minOccurs="0" maxOccurs="1">
+							<xs:complexType>
+								<xs:sequence minOccurs="0" maxOccurs="unbounded">
+									<xs:element name="dependence">
+										<xs:complexType>
+											<xs:attribute name="id" use="required">
+												<xs:simpleType>
+													<xs:restriction base="xs:string">
+														<xs:pattern value="(\s*\d+\s*|all_above|all_above_same_step|above|idem_above)"/>
+													</xs:restriction>
+												</xs:simpleType>
+											</xs:attribute>
+											<xs:attribute name="type" type="xs:string" />
+										</xs:complexType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="parameter" minOccurs="0" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:simpleContent>
+									<xs:extension base="xs:string">
+										<xs:attribute name="name" type="xs:string" use="required" />
+									</xs:extension>
+								</xs:simpleContent>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+					<xs:attribute name="id" type="xs:positiveInteger" use="required" />
+					<xs:attribute name="step" type="xs:nonNegativeInteger" use="required" />
+					<xs:attribute name="type" type="xs:string" use="required" />
+					<xs:attribute name="sequence" type="xs:string" use="required" />
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="triannot_version" type="xs:string" use="required" />
+		<xs:attribute name="description" type="xs:string" />
+	</xs:complexType>
+
+	<xs:key name="uniqueProgramId">
+		<xs:selector xpath="./program"/>
+		<xs:field xpath="@id"/>
+	</xs:key>
+</xs:element>
+
+</xs:schema>

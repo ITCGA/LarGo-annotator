@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="ProteinMaker">
+
+		<entry key="execParameters">
+			<entry key="useGeneModelData" description="Define if the gene models described in the geneModelGffFile must be used during the traduction process">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry> <!-- Only the coding part of each gene contained in the fasta sequences will be translated into Amino Acids -->
+				<entry key="falseValue">no</entry> <!-- Each fasta sequence will be fully translated into Amino Acids -->
+			</entry>
+
+			<entry key="geneModelGffFile" description="GFF file containing gene structure predictions that will be used to extract the coding part of each sequence of nucleotide (Only used if useGeneModelData is set to yes)">
+				<entry key="type">string</entry>
+			</entry>
+
+			<entry key="rejectedTags" description="List of tags/attributes - If a gene model possess one of the defined tags/attributes then it will not be written in the standard output files but will be written in the .rejected files (Only used if useGeneModelData is set to yes)">
+				<entry key="type">string</entry>
+				<entry key="isArray">yes</entry>
+				<entry key="defaultValue">
+					<entry>pseudogene</entry>
+					<entry>partially_sequenced</entry>
+				</entry>
+				<entry key="possibleValues">
+					<entry>pseudogene</entry>
+					<entry>partially_sequenced</entry>
+					<entry>expressed</entry>
+					<entry>wrong_splice</entry>
+				</entry>
+			</entry>
+
+			<entry key="cds_sequence_file" description="Name of the multi-fasta file that will contain all the CDS sequences"> <!-- Only generated when useGeneModelData is set to yes -->
+				<entry key="type">string</entry>
+				<entry key="defaultValue">CDS.seq</entry>
+			</entry>
+
+			<entry key="protein_sequence_file" description="Name of the multi-fasta file that will contain all the protein sequences">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">string</entry>
+			</entry>
+		</entry>
+
+	</section>
+</triannotConf>

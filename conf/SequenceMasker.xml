@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="SequenceMasker">
+
+		<entry key="execParameters">
+			<entry key="masked_sequence" description="Name of the masked sequence file to create">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">string</entry>
+			</entry>
+
+			<entry key="masking_mode" description="Type of masking. Possible values are [use_masking_letter|convert_to_lowercase]">
+				<entry key="defaultValue">use_masking_letter</entry>
+				<entry key="type">string</entry>
+				<entry key="possibleValues">
+					<entry>use_masking_letter</entry>
+					<entry>convert_to_lowercase</entry>
+				</entry>
+			</entry>
+
+			<entry key="masking_letter" description="Letter to use to mask a base when the masking mode is set to 'use_masking_letter'. Possible values are [N|X]">
+				<entry key="defaultValue">N</entry>
+				<entry key="type">string</entry>
+				<entry key="possibleValues">
+					<entry>N</entry>
+					<entry>X</entry>
+				</entry>
+			</entry>
+
+			<entry key="input_file" description="Input files that contains the coordinates of the regions to mask">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">string</entry>
+				<entry key="isArray">yes</entry>
+			</entry>
+
+			<entry key="input_type" description="Type of the input files that contains the coordinates of the regions to mask. Possible values are [XM|Tallymer|GFF]">
+				<entry key="defaultValue">GFF</entry>
+				<entry key="type">string</entry>
+				<entry key="possibleValues">
+					<entry>XM</entry>
+					<entry>Tallymer</entry>
+					<entry>GFF</entry>
+				</entry>
+			</entry>
+
+			<entry key="masking_threshold" description="Only used if the input_type is Tallymer - If a given mer occurs more than 'masking_threshold' times in the BAC sequence then it will be masked">
+				<entry key="defaultValue">6</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+			</entry>
+
+			<entry key="feature_type" description="Only used if the input_type is set to 'GFF' - Defines which feature types are concerned by the coordinates recovery">
+				<entry key="type">string</entry>
+				<entry key="isArray">yes</entry>
+				<entry key="defaultValue">
+					<entry>mRNA</entry>
+				</entry>
+				<entry key="possibleValues">
+					<entry>gene</entry>
+					<entry>mRNA</entry>
+					<entry>exon</entry>
+					<entry>CDS</entry>
+					<entry>polypeptide</entry>
+					<entry>tRNA</entry>
+					<entry>rRNA</entry>
+					<entry>ncRNA</entry>
+					<entry>repeat_region</entry>
+					<entry>match_part</entry>
+					<entry>ORF</entry>
+				</entry>
+			</entry>
+
+			<entry key="generate_IG_file" description="Generate the .ig file for Eugene (Eugene use this file to determine which part of the initial sequence file is masked) ?">
+				<entry key="defaultValue">no</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+
+			<entry key="generate_global_XM_file" description="Generate a Global XM file that centralized the content of every XM input files ?">
+				<entry key="defaultValue">no</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+
+			<entry key="remove_simple_XM_files" description="Destroy all the simple .xm input files after usage ?">
+				<entry key="defaultValue">no</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+		</entry>
+
+	</section>
+</triannotConf>

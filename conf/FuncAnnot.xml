@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="FuncAnnot">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|TriAnnotPipeline|bin</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<!-- Job submission related parameters -->
+			<entry key="isSubAnnotation" description="Used internally to determine if the current execution is a sub-annotation task">
+				<entry key="defaultValue">no</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+			<entry key="nbCore" description="Number of thread to use for multithreaded programs used in FuncAnnot (ie blast, HMMscan, etc.)">
+				<entry key="defaultValue">getValue(Runners|getRunnerName()|defaultNumberOfThread)</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">1</entry>
+				<entry key="maxValue">getValue(Runners|getRunnerName()|maximumNumberOfThreadByTool)</entry>
+			</entry>
+
+			<!-- Sub TriAnnot parameters -->
+			<entry key="program_launcher_stagelist" description="Name of tasks XML file to generate for the sub TriAnnotUnit">
+				<entry key="defaultValue">FuncAnnot_stagelist.xml</entry>
+				<entry key="type">string</entry>
+			</entry>
+
+			<entry key="taskJobRunnerName" description="Name of the runner to use to submit the tasks of the sub TriAnnotUnit">
+				<entry key="defaultValue">getRunnerName()</entry>
+				<entry key="type">string</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<entry key="gff_to_annotate">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">string</entry>
+			</entry>
+		</entry>
+
+		<entry key="reconstructionParameters">
+			<entry key="activateReconstruction" description="Activate or desactivate the global result files reconstruction for splitted sequences">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+		</entry>
+
+		<entry key="Hypothetical_like_keywords" description="When keepHypothetical parameter is equal to 'no' we eliminate blast results that contains at least one of the following keywords (case insensitive)">
+			<entry>hypothetical</entry>
+			<entry>uncharacterized</entry>
+			<entry>predicted</entry>
+		</entry>
+
+		<entry key="TE_like_keywords" description="When keepTElikeOnly parameter is equal to 'yes' we only keep blast results that contains at least one of the following keywords (case insensitive">
+			<entry>transposase</entry>
+			<entry>transposable</entry>
+			<entry>transposon</entry>
+			<entry>retrotransposon</entry>
+			<entry>LINE</entry>
+			<entry>SINE</entry>
+			<entry>Copia</entry>
+			<entry>Gypsy</entry>
+			<entry>Mariner</entry>
+		</entry>
+
+	</section>
+</triannotConf>

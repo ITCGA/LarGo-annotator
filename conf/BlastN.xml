@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="BlastN">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|BlastN|bin</entry>
+			<entry>BlastPlus</entry>
+		</entry>
+
+		<entry key="additionalConfigurationSectionsToInclude" description="List of configuration sections that defines other parameters that will be included in this section during the loading procedure">
+			<entry>BlastPlus</entry>
+		</entry>
+
+		<entry key="commonParameters">
+			<entry key="database">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|db</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="listOfValuesFilter">
+					<entry key="filterPath">availableFormats</entry>
+					<entry key="filterMode">values</entry>
+					<entry key="filterAllowedValues">
+						<entry>NucleicBlast</entry>
+					</entry>
+				</entry>
+			</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<!-- Input query options -->
+			<entry key="strand" description="-strand - Query strand(s) to search against database/subject">
+				<entry key="defaultValue">both</entry>
+				<entry key="type">string</entry>
+				<entry key="possibleValues">
+					<entry>both</entry>
+					<entry>minus</entry>
+					<entry>plus</entry>
+				</entry>
+			</entry>
+
+			<!-- General search options -->
+			<entry key="task" description="-task">
+				<entry key="defaultValue">blastn</entry>
+				<entry key="type">string</entry>
+				<entry key="possibleValues">
+					<entry>blastn</entry>
+					<entry>blastn-short</entry>
+					<entry>dc-megablast</entry>
+					<entry>megablast</entry>
+					<entry>rmblastn</entry>
+				</entry>
+			</entry>
+
+			<entry key="mismatchPenalty" description="-penalty - Penalty for a nucleotide mismatch">
+				<entry key="type">number</entry>
+			</entry>
+
+			<entry key="matchReward" description="-reward - Reward for a nucleotide match">
+				<entry key="type">number</entry>
+			</entry>
+
+			<!-- Query filtering options -->
+			<entry key="queryFiltering" description="-dust - Filter query sequence with DUST">
+				<entry key="defaultValue">20 64 1</entry>
+				<entry key="type">string</entry> <!-- Boolean type cannot be used, see blastn -help for more informations -->
+			</entry>
+
+			<!-- Output options -->
+			<entry key="outFile" description="Name to use for the blast out file">
+				<entry key="defaultValue">{step}_BLASTN_{database}.res</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<!-- Custom feature source -->
+			<entry key="sourceTag" description="Source Tag to use during features creation">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">BLASTN_{database}</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_BLASTN_{database}.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_BLASTN_{database}.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLRename.match">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+			<entry key="EMBLRename.match_part">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">BLASTN_{database}</entry>
+			</entry>
+		</entry>
+
+	</section>
+</triannotConf>

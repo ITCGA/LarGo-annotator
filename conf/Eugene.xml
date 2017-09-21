@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="Eugene">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|Eugene|bin</entry>
+			<entry>PATHS|config|Eugene|path</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<entry key="igFile">
+				<entry key="type">string</entry>
+			</entry>
+
+			<entry key="eugeneParFileFullPath" description="Full path to a complete Eugene .par file (This file must include both standard Eugene parameters and analysis specific parameters (like AnnotaStruct.FileExtension[0] for example))">
+				<entry key="type">string</entry>
+				<entry key="mandatory">yes</entry>
+			</entry>
+
+			<entry key="evidenceFile" description="This multi-value capable parameter must be used to define the files that will be used by the Eugene combiner (AnnotaStruct files, Est files, Blast/Exonerate files, etc.). Each value must be formatted as follow: Name_of_the_TriAnnot_GFF_file|Eugene_extension_for_this_file (Example: 3_AUGUSTUS_wheat.gff|predictor0.gff3)">
+				<entry key="type">string</entry>
+				<entry key="isArray">yes</entry>
+			</entry>
+
+			<entry key="outFile" description="Name to use for the Eugene out file">
+				<entry key="defaultValue">{step}_EUGENE.out</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<!-- Custom feature source -->
+			<entry key="sourceTag" description="Source Tag to use during features creation">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">EUGENE</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_EUGENE.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_EUGENE.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|gene</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">joinedCDSOnly</entry>
+			</entry>
+
+			<entry key="EMBLRename.CDS">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">Eugene</entry>
+			</entry>
+			<entry key="EMBLRename.polypeptide">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">Eugene</entry>
+			</entry>
+		</entry>
+
+	</section>
+</triannotConf>

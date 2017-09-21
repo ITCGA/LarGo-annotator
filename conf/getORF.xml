@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="getORF">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|getORF|bin</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<entry key="geneticCode" description="Genetic code to use during ORF detection">
+				<entry key="type">number</entry>
+				<entry key="defaultValue">0</entry>
+				<entry key="possibleValues">
+					<entry>0</entry> <!--Standard -->
+					<entry>1</entry> <!--Standard with alternative initiation codons -->
+					<entry>2</entry> <!--Vertebrate Mitochondrial -->
+					<entry>3</entry> <!--Yeast Mitochondrial -->
+					<entry>4</entry> <!--Mold, Protozoan, Coelenterate Mitochondrial and Mycoplasma/Spiroplasma -->
+					<entry>5</entry> <!--Invertebrate Mitochondrial -->
+					<entry>6</entry> <!--Ciliate Macronuclear and Dasycladacean -->
+					<entry>9</entry> <!--Echinoderm Mitochondrial -->
+					<entry>10</entry> <!--Euplotid Nuclear -->
+					<entry>11</entry> <!--Bacterial -->
+					<entry>12</entry> <!--Alternative Yeast Nuclear -->
+					<entry>13</entry> <!--Ascidian Mitochondrial -->
+					<entry>14</entry> <!--Flatworm Mitochondrial -->
+					<entry>15</entry> <!--Blepharisma Macronuclear -->
+					<entry>16</entry> <!--Chlorophycean Mitochondrial -->
+					<entry>21</entry> <!--Trematode Mitochondrial -->
+					<entry>22</entry> <!--Scenedesmus obliquus -->
+					<entry>23</entry> <!--Thraustochytrium Mitochondrial -->
+				</entry>
+			</entry>
+
+			<entry key="minSize" description="Minimum nucleotide size of the detected ORFs">
+				<entry key="type">number</entry>
+				<entry key="defaultValue">30</entry>
+				<entry key="minValue">9</entry>
+			</entry>
+
+			<entry key="maxSize" description="Maximum nucleotide size of the detected ORFs">
+				<entry key="type">number</entry>
+				<entry key="defaultValue">1000000</entry>
+				<entry key="minValue">9</entry>
+			</entry>
+
+			<entry key="findMode" description="ORF find mode and output format">
+				<entry key="type">number</entry>
+				<entry key="defaultValue">2</entry>
+				<entry key="possibleValues">
+					<entry>0</entry> <!-- Translation of regions between STOP codons -->
+					<entry>1</entry> <!-- Translation of regions between START and STOP codons -->
+					<entry>2</entry> <!-- Nucleic sequences between STOP codons -->
+					<entry>3</entry> <!-- Nucleic sequences between START and STOP codons -->
+				</entry>
+			</entry>
+
+			<entry key="startWithMethionine" description="Start codon always code for a Methionine ?">
+				<entry key="defaultValue">no</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+
+			<entry key="searchOnReverseStrand" description="Also search for ORF on the reverse strand ?">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+
+			<entry key="outFile">
+				<entry key="defaultValue">{step}_GETORF.out</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<entry key="orfFile">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">string</entry>
+			</entry>
+
+			<!-- Custom feature source -->
+			<entry key="sourceTag" description="Source Tag to use during features creation">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">GETORF</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_GETORF.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_GETORF.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|ORF</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">keepAllFeatures</entry>
+			</entry>
+
+			<entry key="EMBLRename.ORF">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="reconstructionParameters">
+			<entry key="activateReconstruction" description="Activate or desactivate the global result files reconstruction for splitted sequences">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+		</entry>
+
+		<entry key="geneticCodeDescriptions">
+			<entry key="0">Standard</entry>
+			<entry key="1">Standard with alternative initiation codons</entry>
+			<entry key="2">Vertebrate Mitochondrial</entry>
+			<entry key="3">Yeast Mitochondrial</entry>
+			<entry key="4">Mold, Protozoan, Coelenterate Mitochondrial and Mycoplasma/Spiroplasma</entry>
+			<entry key="5">Invertebrate Mitochondrial</entry>
+			<entry key="6">Ciliate Macronuclear and Dasycladacean</entry>
+			<entry key="9">Echinoderm Mitochondrial</entry>
+			<entry key="10">Euplotid Nuclear</entry>
+			<entry key="11">Bacterial</entry>
+			<entry key="12">Alternative Yeast Nuclear</entry>
+			<entry key="13">Ascidian Mitochondrial</entry>
+			<entry key="14">Flatworm Mitochondrial</entry>
+			<entry key="15">Blepharisma Macronuclear</entry>
+			<entry key="16">Chlorophycean Mitochondrial</entry>
+			<entry key="21">Trematode Mitochondrial</entry>
+			<entry key="22">Scenedesmus obliquus</entry>
+			<entry key="23">Thraustochytrium Mitochondrial</entry>
+		</entry>
+
+		<entry key="findModeDescriptions">
+			<entry key="0">Translation of regions between STOP codons</entry>
+			<entry key="1">Translation of regions between START and STOP codons</entry>
+			<entry key="2">Nucleic sequences between STOP codons</entry>
+			<entry key="3">Nucleic sequences between START and STOP codons</entry>
+		</entry>
+
+	</section>
+</triannotConf>

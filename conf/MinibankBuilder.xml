@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="MinibankBuilder">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|fastacmd|bin</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<entry key="database">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|db</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="listOfValuesFilter">
+					<entry key="filterPath">availableFormats</entry>
+					<entry key="filterMode">values</entry>
+					<entry key="filterAllowedValues">
+						<entry>NucleicBlast</entry>
+						<entry>ProteicBlast</entry>
+					</entry>
+				</entry>
+			</entry>
+			<entry key="databaseType">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">string</entry>
+				<entry key="possibleValues">
+					<entry>dna</entry>
+					<entry>protein</entry>
+				</entry>
+			</entry>
+
+			<entry key="hitListFile" description="Name of the hit list file to use to create minibank">
+				<entry key="defaultValue">{database}_Hit_list.txt</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+			<entry key="minibank_name" description="Name of the minibank file to create">
+				<entry key="defaultValue">Mini_{database}</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+	</section>
+</triannotConf>

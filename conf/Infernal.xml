@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="Infernal">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|Infernal|bin</entry>
+		</entry>
+
+		<entry key="commonParameters">
+			<entry key="database">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|db</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="listOfValuesFilter">
+					<entry key="filterPath">availableFormats</entry>
+					<entry key="filterMode">values</entry>
+					<entry key="filterAllowedValues">
+						<entry>Infernal</entry>
+					</entry>
+				</entry>
+			</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<entry key="reportingEvalueThreshold" description="E-value threshold to report a hit in the output file (cmscan -E option)">
+				<entry key="defaultValue">10</entry>
+				<entry key="type">number</entry>
+			</entry>
+
+			<entry key="targetStrandToSearch" description="Define if the search must be performed on the top, the bottom or both strand of the target sequence">
+				<entry key="type">string</entry>
+				<entry key="defaultValue">both</entry>
+				<entry key="possibleValues">
+					<entry>top</entry>
+					<entry>bottom</entry>
+					<entry>both</entry>
+				</entry>
+			</entry>
+
+			<entry key="truncatedHitDetection" description="Turn ON or OFF the truncated hit detection (cmscan --notrunc option)">
+				<entry key="defaultValue">on</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">on</entry>
+				<entry key="falseValue">off</entry>
+			</entry>
+
+			<entry key="nbCore" description="Number of worker threads (cmscan --cpu option)">
+				<entry key="defaultValue">getValue(Runners|getRunnerName()|defaultNumberOfThread)</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">1</entry>
+				<entry key="maxValue">getValue(Runners|getRunnerName()|maximumNumberOfThreadByTool)</entry>
+			</entry>
+
+			<entry key="outFile">
+				<entry key="defaultValue">{step}_INFERNAL_{database}.out</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<!-- Custom feature source -->
+			<entry key="sourceTag" description="Source Tag to use during features creation">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">INFERNAL_{database}</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_INFERNAL_{database}.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_INFERNAL_{database}.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|rna</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">keepAllFeatures</entry>
+			</entry>
+
+			<entry key="EMBLRename.ncRNA">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">INFERNAL</entry>
+			</entry>
+		</entry>
+
+		<entry key="reconstructionParameters">
+			<entry key="activateReconstruction" description="Activate or desactivate the global result files reconstruction for splitted sequences">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+		</entry>
+
+	</section>
+</triannotConf>

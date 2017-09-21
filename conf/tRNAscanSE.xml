@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="tRNAscanSE">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|tRNAscanSE|bin</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<entry key="report_cutoff">
+				<entry key="defaultValue">70</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+			</entry>
+			<entry key="tRNA_maxlength">
+				<entry key="defaultValue">116</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+			</entry>
+			<entry key="nucleotide_padding">
+				<entry key="defaultValue">7</entry>
+				<entry key="type">number</entry>
+				<entry key="minValue">0</entry>
+			</entry>
+			<entry key="tRNAscan_mode">
+				<entry key="defaultValue">S</entry>
+				<entry key="type">string</entry>
+				<entry key="possibleValues">
+					<entry>R</entry>
+					<entry>S</entry>
+				</entry>
+			</entry>
+			<entry key="EufindtRNA_mode">
+				<entry key="defaultValue">R</entry>
+				<entry key="type">string</entry>
+				<entry key="possibleValues">
+					<entry>R</entry>
+					<entry>N</entry>
+					<entry>S</entry>
+				</entry>
+			</entry>
+			<entry key="outFile" description="Name to use for the tRNAscanSE out file">
+				<entry key="defaultValue">{step}_TRNASCAN-SE.res</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<!-- Custom feature source -->
+			<entry key="sourceTag" description="Source Tag to use during features creation">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">TRNASCAN-SE</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_TRNASCAN-SE.gff</entry>
+			</entry>
+
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_TRNASCAN-SE.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|rna</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">keepAllFeatures</entry>
+			</entry>
+
+			<entry key="EMBLRename.tRNA">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="reconstructionParameters">
+			<entry key="activateReconstruction" description="Activate or desactivate the global result files reconstruction for splitted sequences">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+		</entry>
+
+	</section>
+</triannotConf>

@@ -1,0 +1,58 @@
+TriAnnot - WARNING - The main working directory (specified through the -d/--workdir argument/option) does not exists and will now be created.
+TriAnnot.TriAnnotConfigurationChecker - INFO - The existence and access rights of each XML configuration file will now be checked
+TriAnnot.TriAnnotConfigurationChecker - INFO - All the XML configuration files exists and are readable
+TriAnnot.TriAnnotConfigurationChecker - INFO - The syntax of the various XML configuration files will now be checked
+TriAnnot.TriAnnotConfigurationChecker - INFO - No syntax error has been detected
+TriAnnot - INFO - The content of the various XML configuration files will now be loaded into memory
+TriAnnot - INFO - All configuration files have been loaded
+TriAnnot.TriAnnotConfigurationChecker - INFO - The existence of every mandatory configuration sections will now be checked
+TriAnnot.TriAnnotConfigurationChecker - INFO - All mandatory configuration sections are present in your configuration files
+TriAnnot.TriAnnotConfigurationChecker - INFO - The existence of every mandatory configuration entries of the global configuration files will now be checked
+TriAnnot.TriAnnotConfigurationChecker - INFO - All mandatory configuration entries are present in your configuration files
+TriAnnot.TriAnnotConfigurationChecker - INFO - The validity of every configuration dependencies will now be checked
+TriAnnot.TriAnnotConfigurationChecker - INFO - All dependencies are fulfilled
+TriAnnot.TriAnnotConfigurationChecker - INFO - The definition of every parameters of each supported tool will now be checked
+TriAnnot.TriAnnotConfigurationChecker - INFO - All parameter's definitions are valid
+TriAnnot.TriAnnotConfigurationChecker - INFO - The existence of every database, soft, matrix, etc. referenced in the TriAnnotConfig_PATHS XML configuration file will now be checked
+TriAnnot.TriAnnotConfigurationChecker - INFO - Checking all the databases described in the XML configuration file
+TriAnnot.TriAnnotConfigurationChecker - INFO - Checking all the programs/softwares described in the XML configuration file
+TriAnnot.TriAnnotConfigurationChecker - INFO - Checking all the matrices described in the XML configuration file
+TriAnnot.TriAnnotConfigurationChecker - INFO - Checking all the external configuration files/directories described in the XML configuration file
+TriAnnot.TriAnnotConfigurationChecker - INFO - Checking all the indexes described in the XML configuration file
+TriAnnot.TriAnnotConfigurationChecker - WARNING - It seems that you have no index file defined in your <PATHS|index> configuration entry. You will probably need to edit your configuration before running a TriAnnot analysis that includes GTtallymer.
+TriAnnot.TriAnnotConfigurationChecker - INFO - Total number of invalid paths in the TriAnnotConfig_PATHS XML configuration file: 31 !
+TriAnnot.TriAnnotConfigurationChecker - INFO - Please check the configuration entries described below before executing TriAnnot again !
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Invalid paths of the <db> category:
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <TURprp> - Format <ProteicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .pin
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <TURprp> - Format <ProteicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .phr
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <TURprp> - Format <ProteicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .psi
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <TURprp> - Format <ProteicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .psq
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <TURprp> - Format <ProteicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .psd
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <TRITmito> - Format <NucleicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .nin
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <TRITmito> - Format <NucleicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .nhr
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <TRITmito> - Format <NucleicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .nsi
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <TRITmito> - Format <NucleicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .nsq
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <TRITmito> - Format <NucleicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .nsd
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <TRITchloro> - Format <NucleicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .nin
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <TRITchloro> - Format <NucleicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .nhr
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <TRITchloro> - Format <NucleicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .nsi
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <TRITchloro> - Format <NucleicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .nsq
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <TRITchloro> - Format <NucleicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .nsd
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <MTRpep> - Format <ProteicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .pin
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <MTRpep> - Format <ProteicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .phr
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <MTRpep> - Format <ProteicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .psi
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <MTRpep> - Format <ProteicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .psq
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Database <MTRpep> - Format <ProteicBlast> - One of the mandatory file for this database is missing or unreadable ! The authorized extensions for this file are: .psd
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Invalid paths of the <soft> category:
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Software <tBlastN> - The following path defined through the <bin> entry does not correspond to a valid executable program: /mnt/hgfs/D/Software/ncbi-blast-2.3.0+-x64-linux/ncbi-blast-2.3.0+/bin/tblastn
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Software <tBlastX> - The following path defined through the <bin> entry does not correspond to a valid executable program: /mnt/hgfs/D/Software/ncbi-blast-2.3.0+-x64-linux/ncbi-blast-2.3.0+/bin/tblastx
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Software <Eugene> - The following path defined through the <bin> entry does not correspond to a valid executable program: /usr/local/bin/eugene
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Software <InterProScan5> - The following path defined through the <bin> entry does not correspond to a valid executable program: /home/zhuhd/TriAnnotTest/TriAnnot_20160920/TriAnnot_software/interproscan-5.21-60.0-64-bit/interproscan-5.21-60.0/interproscan.sh
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Software <getORF> - The following path defined through the <bin> entry does not correspond to a valid executable program: /usr/local/bin/getorf
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Software <BlastX> - The following path defined through the <bin> entry does not correspond to a valid executable program: /mnt/hgfs/D/Software/ncbi-blast-2.3.0+-x64-linux/ncbi-blast-2.3.0+/bin/blastx
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Software <BlastP> - The following path defined through the <bin> entry does not correspond to a valid executable program: /mnt/hgfs/D/Software/ncbi-blast-2.3.0+-x64-linux/ncbi-blast-2.3.0+/bin/blastp
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Software <BlastN> - The following path defined through the <bin> entry does not correspond to a valid executable program: /mnt/hgfs/D/Software/ncbi-blast-2.3.0+-x64-linux/ncbi-blast-2.3.0+/bin/blastn
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Software <tRNAscanSE> - The following path defined through the <bin> entry does not correspond to a valid executable program: /home/zhuhd/TriAnnotTest/TriAnnot_20160920/TriAnnot_software/tRNAscan-SE-1.3.1/bin/tRNAscan-SE
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Software <GeneID> - The following path defined through the <bin> entry does not correspond to a valid executable program: /home/zhuhd/TriAnnotTest/TriAnnot_20160920/TriAnnot_software/geneid_v1.4.4.Jan_13_2011/geneid/bin/geneid
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Invalid paths of the <matrices> category:
+TriAnnot.TriAnnotConfigurationChecker - ERROR - Matrix <wheat> for program <GeneID> - The following matrix file is missing or unreadable: /home/zhuhd/TriAnnotTest/TriAnnot_20160920/TriAnnot_software/geneid_v1.4.4.Jan_13_2011/geneid/param/wheat.param

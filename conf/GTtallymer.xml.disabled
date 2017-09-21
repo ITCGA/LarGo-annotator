@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="GTtallymer">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|GTtallymer|bin</entry>
+		</entry>
+
+		<entry key="commonParameters">
+			<entry key="tallymerIndex">
+				<entry key="mandatory">yes</entry>
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">PATHS|index|GTtallymer</entry>
+				<entry key="listOfValuesMode">keys</entry>
+			</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<entry key="strand" description="Strand to be searched: f for foward strand, p for reverse complemented strand, fp for both strands">
+				<entry key="defaultValue">f</entry>
+				<entry key="type">string</entry>
+				<entry key="possibleValues">
+					<entry>f</entry>
+					<entry>p</entry>
+					<entry>fp</entry>
+				</entry>
+			</entry>
+			<entry key="display_sequence" description="Add the 'sequence' column to GT Tallymer Search output file">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+			<entry key="create_plot_file" description="if yes a plot MDR file for Artemis will be created after GT tallymer search execution">
+				<entry key="defaultValue">no</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+			<entry key="outFile" description="Name to use for the GTtallymer out file">
+				<entry key="defaultValue">{step}_GTtallymer_{tallymerIndex}.res</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+			<entry key="errorFile" description="Name to use for the GTtallymer error file">
+				<entry key="defaultValue">{step}_GTtallymer_{tallymerIndex}.err</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+			<entry key="forwardPlotFile" description="Name to use for the forward strand plot file">
+				<entry key="defaultValue">{step}_GTtallymer_{tallymerIndex}.fplot</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+			<entry key="reversePlotFile" description="Name to use for the reverse complement strand plot file">
+				<entry key="defaultValue">{step}_GTtallymer_{tallymerIndex}.rplot</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+	</section>
+</triannotConf>

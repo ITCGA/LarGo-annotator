@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<triannotConf triannot_version="">
+	<section name="InterProScan5">
+
+		<entry key="configurationDependencies" description="A list of paths to other configuration entries that must be defined to allow the use of this tool">
+			<entry>PATHS|soft|InterProScan5|bin</entry>
+		</entry>
+
+		<entry key="execParameters">
+			<entry key="outFile" description="Name to use for the main InterProScan output file (in tsv format)">
+				<entry key="defaultValue">{step}_INTERPROSCAN5.xml</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+
+			<entry key="svgTarball" description="Name to use for the tarball that will contains a graphical view of InterProScan results for each protein sequence (ie. svg images)">
+				<entry key="defaultValue">{step}_INTERPROSCAN5_svg_tarball.tar.gz</entry>
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+
+			<entry key="applications" description="List of InterProScan applications to execute. Empty list = All applications. Supported programs/modules/applications are listed in the possibleValues tag">
+				<entry key="type">string</entry>
+				<entry key="isArray">yes</entry>
+				<entry key="defaultValue">
+					<entry>ProDom</entry>
+					<entry>Pfam</entry>
+					<entry>SMART</entry>
+					<entry>ProSiteProfiles</entry>
+					<entry>ProSitePatterns</entry>
+				</entry>
+				<entry key="possibleValues">
+					<entry>Hamap</entry>
+					<entry>ProDom</entry>
+					<entry>PIRSF</entry>
+					<entry>Pfam</entry>
+					<entry>SMART</entry>
+					<entry>ProSiteProfiles</entry>
+					<entry>TIGRFAM</entry>
+					<entry>PRINTS</entry>
+					<entry>SUPERFAMILY</entry>
+					<entry>ProSitePatterns</entry>
+					<entry>Coils</entry>
+					<entry>Gene3D</entry>
+				</entry>
+			</entry>
+
+			<entry key="desactivateMatchLookup" description="Desactivate the precalculated match lookup service ?">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+
+			<entry key="activateOptionalLookups" description="Switch on look up for InterPro annotation (--iprlookup option), Gene Ontology (--goterms option) and Pathways (--pathways option).">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+		</entry>
+
+		<entry key="parserParameters">
+			<entry key="useGeneModelData" description="Define if the gene structure described in the geneModelGffFile must be used to determine the nucleic coordinates of polypeptide domains">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry> <!-- The gene structure will be used to determine the nucleic coordinates of every polypeptide domain -->
+				<entry key="falseValue">no</entry> <!-- Polypetide domains will have proteic coordinates -->
+			</entry>
+
+			<entry key="geneModelGffFile" description="GFF file containing gene structure predictions that will be used to determine the nucleic coordinates of polypeptide domains">
+				<entry key="type">string</entry>
+			</entry>
+
+			<!-- Output file names -->
+			<entry key="gffFile" description="GFF File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_INTERPROSCAN5.gff</entry>
+			</entry>
+			<entry key="emblFile" description="EMBL File name">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+				<entry key="defaultValue">{step}_INTERPROSCAN5.embl</entry>
+			</entry>
+
+			<!-- EMBL file creation constraints -->
+			<entry key="EMBLFormat">
+				<entry key="type">configEntry</entry>
+				<entry key="listOfValuesPath">EMBL|formats|domain</entry>
+				<entry key="listOfValuesMode">keys</entry>
+				<entry key="defaultValue">joinedPolypeptideDomainPartOnly</entry>
+			</entry>
+
+			<entry key="EMBLRename.polypeptide_domain">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+			<entry key="EMBLRename.polypeptide_domain_part">
+				<entry key="type">string</entry>
+				<entry key="needSubstitution">yes</entry>
+			</entry>
+		</entry>
+
+		<entry key="reconstructionParameters">
+			<entry key="activateReconstruction" description="Activate or desactivate the global result files reconstruction for splitted sequences">
+				<entry key="defaultValue">yes</entry>
+				<entry key="type">boolean</entry>
+				<entry key="trueValue">yes</entry>
+				<entry key="falseValue">no</entry>
+			</entry>
+		</entry>
+
+	</section>
+</triannotConf>
